@@ -1,0 +1,46 @@
+.menu {
+    width: 30px;
+    height: 23px;
+    cursor: pointer;
+
+    &__burger_line {
+        width: 23px;
+        height: 9px;
+        position: relative;
+        display: block;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 23px;
+            height: 3.8px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+    }
+
+    &__burger_line_last {
+        width: 23px;
+        height: 9px;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            right: 0;
+            bottom: 0;
+            width: 12px;
+            height: 3.8px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+.header {
+    width: 100%;
+    height: 58px;
+    background-color: #173f5f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 55px;
+
+    &__logo {
+        margin-left: 60px;
+    }
+
+    &__assets {
+        width: 200px;
+        height: 23px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between !important;
+        margin-right: 60px;
+    }
+}
