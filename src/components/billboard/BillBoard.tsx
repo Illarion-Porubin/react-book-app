@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./BillBoard.module.scss";
 import billboard from "../../assets/png/poster.png";
+import { Search } from "../search/Search";
 
 export const BillBoard = () => {
   return (
@@ -13,7 +14,10 @@ export const BillBoard = () => {
           magna velit eleifend. Amet, quis urna, a eu.
         </p>
       </div>
-      <img className={s.billboard__img} src={billboard} alt="billboard" />
+      <div className={s.billboard__img_wrap}>
+        <img className={s.billboard__img} src={billboard} alt="billboard" />
+      </div>
+      <Search />
     </div>
   );
 };

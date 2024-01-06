@@ -1,28 +1,40 @@
-.billboard{
+.billboard {
     width: 100%;
-    height: auto;
+    height: 450px;
     display: flex;
     justify-content: space-between;
-    &__content{
+    position: relative;
+
+    &__content {
         max-width: 607px;
         text-align: left;
         margin-left: 60px;
+        z-index: 1;
     }
 
-    &__title{
+    &__title {
         color: #393280;
         font-size: 60px;
         line-height: 145%;
     }
 
-    &__text{
+    &__text {
         width: 100%;
         font-size: 24px;
         line-height: 180%;
     }
 
-    &__img{
-        max-width: 712px;
-        height: 657px;
+    &__img_wrap {
+        position: absolute;
+        right: 0;
+        top: -30px;
+        max-width: 40%;
+        height: auto;
+        z-index: -1;
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
     }
 }
