@@ -1,8 +1,10 @@
 .billboard {
     width: 100%;
-    height: 450px;
+    height: 600px;
     display: flex;
     justify-content: space-between;
+    background: linear-gradient(79deg, #FFE5E5 -2.75%, #F5FFFE 20.07%, #FFF 54.28%, #FFF 101.59%);
+    z-index: 0;
     position: relative;
 
     &__content {

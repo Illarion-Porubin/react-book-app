@@ -1,7 +1,11 @@
+body{
+    font-family: Inter;
+}
+
 .container{
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 20px;
 }
 
 a, li{

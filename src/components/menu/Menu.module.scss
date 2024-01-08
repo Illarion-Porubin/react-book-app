@@ -1,28 +1,35 @@
-.menu{
+.menu {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: center;
     margin-bottom: 55px;
 
-    &__list{
+    &__list {
         display: flex;
     }
 
-    &__item{
+    &__item {
         border-left: 1px solid #cfcfcf;
         border-right: 1px solid #cfcfcf;
         padding: 0 20px;
-        transition: all .3s;
-        &:first-child{
-            border-left: transparent
+        color: #111;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 2.16px;
+        text-transform: capitalize;
+        transition: all 0.3s;
+        &:first-child {
+            border-left: transparent;
         }
-        &:last-child{
+        &:last-child {
             border-right: transparent;
         }
-        &:hover{
-            color: #ED553B;
-            transition: all .3s;
+        &:hover {
+            color: #ed553b;
+            transition: all 0.3s;
         }
     }
 }

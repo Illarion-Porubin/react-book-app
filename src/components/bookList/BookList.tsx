@@ -5,11 +5,11 @@ import { Book } from "../book/Book";
 
 export const BookList = () => {
   return (
-    <>
+    <div className="container">
       <Title />
       <div className={s.booklist}>
           <Book/>
       </div>
-    </>
+    </div>
   );
 };
