@@ -7,14 +7,19 @@
     margin: 55px 0;
 
     &__text {
-        font-size: 48px;
         color: #393280;
         text-align: center;
+        font-family: Inter;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: capitalize;
     }
 
     &__span {
         position: relative;
-        width: 33%;
+        width: 28%;
         height: auto;
         &::before {
             content: "";
