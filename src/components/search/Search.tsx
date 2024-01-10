@@ -11,6 +11,7 @@ export const Search = () => {
         type="text"
         placeholder="Search"
         onChange={(e) => search.setSearchTerm(e.target.value)}
+        autoFocus
       />
     </div>
   );
