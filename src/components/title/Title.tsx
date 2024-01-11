@@ -5,7 +5,7 @@ export const Title = () => {
   return (
     <div className={s.title}>
       <span className={s.title__span}/>
-      <h1 className={s.title__text}>Books worth reading</h1>
+      <h1 className={s.title__text}>Your search</h1>
       <span className={s.title__span}/>
     </div>
   );

@@ -1,15 +1,21 @@
-body{
+body {
     font-family: Inter;
 }
 
-.container{
+.container {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-a, li{
+a,
+li {
     text-decoration: none;
     list-style: none;
     color: unset;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }

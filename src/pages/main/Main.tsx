@@ -6,13 +6,14 @@ import { BookList } from '../../components/bookList/BookList'
 import { Footer } from '../../components/footer/Footer'
 
 export const Main = () => {
+  const [loaded, setLoaded] = React.useState<boolean>(false);
   return (
     <>
         <Header/>
         <Menu/>
         <BillBoard/>
-        <BookList/>
-        <Footer/>
+        <BookList />
+        {/* <Footer/> */}
     </>
   )
 }
