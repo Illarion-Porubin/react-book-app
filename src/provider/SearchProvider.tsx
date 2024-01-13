@@ -22,8 +22,7 @@ export const SearchProvider: React.FC<Props> = ({ children }) => {
     setLoading(true);
     try {
       if (debounce) {
-        // '&fields=key,title,author_name,editions,cover_edition_key&limit=8'
-        const res = await axios.get(URL + debounce + '&lang=en&limit=12' ).then((data) => {
+        const res = await axios.get(URL + debounce + '&fields=key,title,author_name,editions,cover_edition_key&lang=en&limit=12' ).then((data) => {
           return data;
         });
         console.log(res.data);

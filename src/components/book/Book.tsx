@@ -12,6 +12,8 @@ export const Book: React.FC<Props> = ({ book }) => {
     return " " + item;
   });
 
+  console.log(book.key.slice(7));
+
   return (
     <>
       <div className={s.book} key={book.cover_i}>

@@ -1,9 +1,9 @@
 .billboard {
     width: 100%;
-    height: 600px;
+    height: 400px;
     display: flex;
     justify-content: space-between;
-    background: linear-gradient(79deg, #FFE5E5 -2.75%, #F5FFFE 20.07%, #FFF 54.28%, #FFF 101.59%);
+    background: linear-gradient(79deg, #e5ebff -2.75%, #F5FFFE 20.07%, #FFF 54.28%, #FFF 101.59%);
     z-index: 0;
     position: relative;
 
@@ -30,7 +30,7 @@
         position: absolute;
         right: 0;
         top: -30px;
-        max-width: 40%;
+        max-width: 38%;
         height: auto;
         z-index: -1;
     }
