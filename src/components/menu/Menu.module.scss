@@ -13,13 +13,7 @@
         border-left: 1px solid #cfcfcf;
         border-right: 1px solid #cfcfcf;
         padding: 0 20px;
-        color: #111;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        letter-spacing: 2.16px;
-        text-transform: capitalize;
+        color: #111;      
         transition: all 0.3s;
         &:first-child {
             border-left: transparent;
@@ -31,5 +25,24 @@
             color: #ed553b;
             transition: all 0.3s;
         }
+    }
+
+    &__link{
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 2.16px;
+        text-transform: capitalize;
+    }
+}
+
+
+@media(max-width: 680px) {
+    .menu__item{
+        padding: 0 12px;
+    }
+    .menu__link{
+        font-size: 12px;
     }
 }

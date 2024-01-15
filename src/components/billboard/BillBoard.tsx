@@ -9,15 +9,15 @@ export const BillBoard = () => {
       <div className={s.billboard__content}>
         <h1 className={s.billboard__title}>Find your book!</h1>
         <p className={s.billboard__text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu
-          feugiat amet, libero ipsum enim pharetra hac. Urna commodo, la cus ut
-          magna velit eleifend. Amet, quis urna, a eu.
+          Hi! Here you can find the book you are interested in and learn
+          something interesting about it. This is a small project using react
+          and DB openlibrary to search for books.
         </p>
+        <Search />
       </div>
       <div className={s.billboard__img_wrap}>
         <img className={s.billboard__img} src={billboard} alt="billboard" />
       </div>
-      <Search />
     </div>
   );
 };

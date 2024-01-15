@@ -1,26 +1,30 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
 import s from "./BookInfo.module.scss";
 import axios, { AxiosResponse } from "axios";
+import { Link, useParams } from "react-router-dom";
 import { Loader } from "../loader/Loader";
-import notFound from "../../assets/jpg/cover_not_found.jpg";
+import notFoundImg from "../../assets/jpg/cover_not_found.jpg";
 
 interface BookInfoType {
   data: {
     covers: number[];
     created: {
-      type: string;
       value: string;
     };
     description: {
-      type: string;
-      value: string;
+      value: string | 'There is no description';
     };
     subjects: string[];
     title: string;
   };
   status: number;
 }
+
+const theArr = []
+// theArr [ (2 ** 32 - 1) ] = 1;
+// theArr [ (2 ** 32 - 2) ] = 1;
+
+console.log(theArr.length);
 
 export const BookInfo = () => {
   const { id } = useParams();
@@ -33,12 +37,17 @@ export const BookInfo = () => {
     try {
       if (res.status === 200) {
         const { subjects, title, description, created, covers } = res.data;
-        console.log(res);
-
+        console.log(res.data);
         const newBookInfo: BookInfoType = {
           data: { subjects, title, description, created, covers },
           status: res.status,
         };
+        if(typeof(res.data.description) === 'string'){
+          newBookInfo.data.description = {
+            value: res.data.description
+          }
+          return setBookInfo(newBookInfo);
+        }
         return setBookInfo(newBookInfo);
       }
     } catch (error) {
@@ -46,20 +55,21 @@ export const BookInfo = () => {
     }
   };
 
+ 
+
   React.useEffect(() => {
     fetchBookInfo();
   }, []);
 
-  if (bookInfo?.status !== 200) return <Loader />;
+  if (bookInfo?.status !== 200) return <Loader/>;
 
   const checkImg = bookInfo.data.covers[0]
-    ? `https://covers.openlibrary.org/b/id/${bookInfo.data.covers[0]}-L.jpg`
-    : notFound;
+    ? `https://covers.openlibrary.org/b/id/${bookInfo.data.covers[0]}-M.jpg`
+    : notFoundImg;
 
   const checkAuthor = () => {
     if (bookInfo.data.subjects) {
       return bookInfo.data.subjects
-        // .slice(0, 5)
         .map((item: string, id: number) => {
           return id !== 4 ? item + ", " : item + ".";
         });
@@ -70,7 +80,7 @@ export const BookInfo = () => {
 
   const checDesc = () => {
     if (bookInfo?.data?.description) {
-      return bookInfo?.data?.description?.value?.slice(0, 500) + "...";
+      return bookInfo?.data?.description?.value?.slice(0, 500) + "..." 
     } else {
       return "There is no description";
     }
@@ -83,7 +93,7 @@ export const BookInfo = () => {
       </Link>
       <div className={s.book}>
         <div className={s.book__img_wrap}>
-          <img className={s.book__img} src={checkImg} alt="book__img" />
+          <img className={s.book__img} src={checkImg} alt="book__img"/>
         </div>
         <div className={s.book__info}>
           <h1 className={s.book__info_title}>{bookInfo.data.title}</h1>

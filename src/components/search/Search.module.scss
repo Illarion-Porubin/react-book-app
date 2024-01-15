@@ -1,4 +1,4 @@
-.search{
+.search {
     max-width: 600px;
     height: auto;
     position: absolute;
@@ -6,15 +6,21 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    padding-left: 30px;
     z-index: 1;
 
-    &__input{
+    &__input {
         width: 80%;
         padding: 0 15px;
         height: 45px;
         border: 2px solid black;
         border-radius: 33px;
         background-color: transparent;
+    }
+}
+
+@media (max-width: 680px) {
+    .search {
+        position: relative;
+        text-align: left;
     }
 }
