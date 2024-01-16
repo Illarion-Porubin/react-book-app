@@ -2,23 +2,25 @@ import React, { useState } from "react";
 import s from "./BookList.module.scss";
 import { Title } from "../title/Title";
 import { Book } from "../book/Book";
-import { useSearch } from "../../provider/SearchProvider";
 import { Loader } from "../loader/Loader";
+import { useCustomSelector } from "../../hooks/store";
+import { selectBookData } from "../../redux/selectors";
 
 
 
 export const BookList = () => {
-  const search: any = useSearch();
+  const data = useCustomSelector(selectBookData)
 
-  if(search.loading) return <Loader/>
+  if(data.isLoading === 'loaded') return <Loader/>
 
+  console.log(data); 
 
   return (
-    search.books.length ?
+    data.bookList.length ?
     <div className="container">
       <div className={s.booklist}>
       <Title />
-        {search.books.map((item: any, id: number) => (
+        {data.bookList.map((item: any, id: number) => (
           <Book book={item} key={id} />
         ))}
       </div>

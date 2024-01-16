@@ -35,8 +35,7 @@ export const Book: React.FC<Props> = ({ book }) => {
           <p className={s.book__title}>{book.title}</p>
           <p className={s.book__subtitle}>{book.subtitle || book.title}</p>
           <p className={s.book__author}>{`Авторы: ${Authors}`}</p>
-          <p>Издание:</p>
-          <p>Обновление:</p>
+     
         </div>
       </div>
     </>

@@ -1,16 +1,28 @@
 import React from "react";
 import s from "./Search.module.scss";
-import { useSearch } from "../../provider/SearchProvider";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useCustomDispatch } from "../../hooks/store";
+import { fetchSearchBook } from "../../redux/slices/bookSlice";
 
 export const Search = () => {
-  const search = useSearch();
+  const [findValue, setFindValue] = React.useState<string | null>(null);
+  const debounce = useDebounce(findValue || '', 600);
+  const dispatch = useCustomDispatch();
+
+
+  React.useEffect(() => {
+    if(debounce) {
+      dispatch(fetchSearchBook(debounce));
+    }
+  }, [debounce, dispatch]);
+
   return (
     <div className={s.search}>
       <input
         className={s.search__input}
         type="text"
         placeholder="Search"
-        onChange={(e) => search.setSearchTerm(e.target.value)}
+        onChange={(e) => setFindValue(e.target.value)}
         autoFocus
       />
     </div>
