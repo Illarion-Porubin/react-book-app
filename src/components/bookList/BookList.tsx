@@ -11,9 +11,8 @@ import { selectBookData } from "../../redux/selectors";
 export const BookList = () => {
   const data = useCustomSelector(selectBookData)
 
-  if(data.isLoading === 'loaded') return <Loader/>
+  if(data.isLoading === 'loading') return <Loader/>
 
-  console.log(data); 
 
   return (
     data.bookList.length ?
@@ -21,7 +20,7 @@ export const BookList = () => {
       <div className={s.booklist}>
       <Title />
         {data.bookList.map((item: any, id: number) => (
-          <Book book={item} key={id} />
+          <Book book={item} id={id} key={id} />
         ))}
       </div>
     </div>

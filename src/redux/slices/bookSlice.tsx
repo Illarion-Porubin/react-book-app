@@ -1,26 +1,55 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BookInfoType } from "../../types/types";
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchSearchBook = createAsyncThunk<string, string, { rejectValue: string }>(
-  "api/fetchSearch",
-  async (params: string, { rejectWithValue }) => {
-    try {
-      if(params){
-        const URL = `https://openlibrary.org/search.json?title=`;
-        const fields = `&fields=key,title,author_name,editions,cover_edition_key`;
-        const { data } = await axios.get(URL + params + fields + `&lang=en&limit=12`);  
-        if (!data) {
-          return rejectWithValue("Server Error!");
-        }
-        return data.docs;
+export const fetchBookSearch = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>("api/fetchBookSearch", async (searchValue: string, { rejectWithValue }) => {
+  try {
+    if (searchValue) {
+      const FIELDS = `&fields=key,title,author_name,editions,cover_edition_key`;
+      const URL = `https://openlibrary.org/search.json?title=${searchValue}${''}&lang=en&limit=12`;
+      const { data } = await axios.get(URL);
+      if (!data) {
+        return rejectWithValue("Server Error!");
       }
-    } catch (error) {
-      return rejectWithValue("Can't fetchSearchBook");
+      return data.docs;
     }
+  } catch (error) {
+    return rejectWithValue("Can't fetchSearchBook");
   }
-);
+});
+
+export const fetchBookInfo = createAsyncThunk<
+  any,
+  any,
+  { rejectValue: string }
+>("api/fetchBookInfo", async (bookId: string, { rejectWithValue }) => {
+  try {
+    if (bookId) {
+      const URL = `https://openlibrary.org/works/${bookId}.json`;
+      const { data } = await axios.get(URL);
+      const { subjects, title, description, created, covers, last_modified } =
+        data;
+      if ({ data }) {
+        const newData = {
+          subjects,
+          title,
+          description,
+          created,
+          covers,
+          last_modified,
+        };
+        return newData;
+      }
+      return data ? data : rejectWithValue("Server Error!");
+    }
+  } catch (error) {
+    return rejectWithValue("Cant't fetchBookInfo");
+  }
+});
 
 export interface BookState {
   bookList: any | [];
@@ -43,20 +72,40 @@ export const initialState: BookState = {
 export const bookSlice = createSlice({
   name: "book",
   initialState,
-  reducers: {},
+  reducers: {
+    addId: (state, action) => {
+      state.bookId = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchSearchBook.pending, (state) => {
+      ///fetchBookSearch
+      .addCase(fetchBookSearch.pending, (state) => {
         state.bookList = [];
         state.isLoading = "loading";
       })
-      .addCase(fetchSearchBook.fulfilled, (state, action) => {
+      .addCase(fetchBookSearch.fulfilled, (state, action) => {
         state.bookList = action.payload;
-        console.log(state.bookList, 'state.bookList');
+        // console.log(state.bookList, "state.bookList");
+        state.isLoading = "loaded";
       })
-      .addCase(fetchSearchBook.rejected, (state) => {
+      .addCase(fetchBookSearch.rejected, (state) => {
         state.bookList = [];
+        state.isLoading = "error";
+      })
+      ///fetchBookInfo
+      .addCase(fetchBookInfo.pending, (state) => {
+        state.bookInfo = null;
         state.isLoading = "loading";
+      })
+      .addCase(fetchBookInfo.fulfilled, (state, action) => {
+        state.bookInfo = action.payload;
+        // console.log(state.bookInfo, "state.bookInfo");
+        state.isLoading = "loaded";
+      })
+      .addCase(fetchBookInfo.rejected, (state) => {
+        state.bookInfo = null;
+        state.isLoading = "error";
       });
   },
 });

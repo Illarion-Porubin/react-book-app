@@ -2,12 +2,16 @@ import React from "react";
 import s from "./Book.module.scss";
 import { Link } from "react-router-dom";
 import notFoundImg from "../../assets/jpg/cover_not_found.jpg";
+import { useCustomDispatch } from "../../hooks/store";
+import { bookSlice } from "../../redux/slices/bookSlice";
 
 interface Props {
   book: any;
+  id: number;
 }
 
-export const Book: React.FC<Props> = ({ book }) => {
+export const Book: React.FC<Props> = ({ book, id }) => {
+  const dispatch = useCustomDispatch();
   const BookImg = book.cover_edition_key
     ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`
     : notFoundImg;
@@ -29,6 +33,7 @@ export const Book: React.FC<Props> = ({ book }) => {
           <Link
             className={s.book__popup_btn}
             to={`/book/${book.key.replace("/works/", "")}`}
+            onClick={() => dispatch(bookSlice.actions.addId(id))}
           >
             Read more
           </Link>

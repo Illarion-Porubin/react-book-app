@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Search.module.scss";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useCustomDispatch } from "../../hooks/store";
-import { fetchSearchBook } from "../../redux/slices/bookSlice";
+import { fetchBookSearch } from "../../redux/slices/bookSlice";
 
 export const Search = () => {
   const [findValue, setFindValue] = React.useState<string | null>(null);
@@ -12,7 +12,7 @@ export const Search = () => {
 
   React.useEffect(() => {
     if(debounce) {
-      dispatch(fetchSearchBook(debounce));
+      dispatch(fetchBookSearch(debounce));
     }
   }, [debounce, dispatch]);
 

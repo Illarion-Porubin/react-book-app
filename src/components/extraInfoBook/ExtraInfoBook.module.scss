@@ -1,0 +1,29 @@
+.extra{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+
+    &__img_wrap{
+        max-width: 220px;
+        height: 318px;
+    }
+
+    &__img{
+        width: 100%;
+        height: auto;
+    }
+
+    &__block{
+        max-width: 700px;
+    }
+
+    &__info_list{
+        display: flex;
+        width: 100%;
+    }
+
+    &__info{
+        margin-right: 14px;
+    }
+}
