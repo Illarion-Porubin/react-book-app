@@ -2,28 +2,52 @@
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    padding: 50px 0;
 
-    &__img_wrap{
-        max-width: 220px;
-        height: 318px;
+    &__book_info{
+        width: 180px;
+        height: 320px;
+        margin-right: 80px;
+    }
+
+    &__note{
+        font-size: 14px;
+    }
+
+    &__li{
+        list-style: disc;
+    }
+
+    &__link{
+        font-size: 12px;
+        color: #0f3cb9;
     }
 
     &__img{
         width: 100%;
-        height: auto;
+        height: 280px;
     }
 
     &__block{
         max-width: 700px;
     }
 
+    &__info_main{
+        margin-bottom: 20px;
+    }
+
     &__info_list{
         display: flex;
         width: 100%;
+        margin-bottom: 20px;
     }
 
     &__info{
         margin-right: 14px;
+    }
+
+    &__categories{
+        margin-bottom: 20px;
     }
 }
