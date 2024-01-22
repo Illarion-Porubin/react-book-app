@@ -17,12 +17,12 @@ export const BookList = () => {
   return (
     data.bookList.length ?
     <div className="container">
-      <div className={s.booklist}>
+      <section className={s.booklist}>
       <Title />
         {data.bookList.map((item: any, id: number) => (
           <Book book={item} id={id} key={id} />
         ))}
-      </div>
+      </section>
     </div>
     : null
   );

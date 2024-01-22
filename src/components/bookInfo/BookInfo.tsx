@@ -54,23 +54,27 @@ export const BookInfo: React.FC = () => {
   if (data.isLoading === "loading") return <Loader />;
 
   return (
-    <div className="container">
+    <>
       <Link className={s.back} to="/">
         Go Back
       </Link>
-      <div className={s.book}>
-        <div className={s.book__img_wrap}>
-          <img className={s.book__img} src={checkImg} alt="book__img" />
-        </div>
-        <div className={s.book__info}>
-          <h1 className={s.book__info_title}>{data.bookInfo?.title}</h1>
-          <p className={s.book__info_text}>{`Жанры: ${checkGenres()}`}</p>
-          <p className={s.book__info_text}>{`Издание: ${created}`}</p>
-          <p className={s.book__info_text}>{`Обновление: ${modified}`}</p>
-          <p className={s.book__info_desc}>{checDesc()}</p>
-        </div>
+      <div className="container">
+        <section>
+          <main className={s.book}>
+            <div className={s.book__img_wrap}>
+              <img className={s.book__img} src={checkImg} alt="book__img" />
+            </div>
+            <div className={s.book__info}>
+              <h1 className={s.book__info_title}>{data.bookInfo?.title}</h1>
+              <p className={s.book__info_text}>{`Жанры: ${checkGenres()}`}</p>
+              <p className={s.book__info_text}>{`Издание: ${created}`}</p>
+              <p className={s.book__info_text}>{`Обновление: ${modified}`}</p>
+              <p className={s.book__info_desc}>{checDesc()}</p>
+            </div>
+          </main>
+        </section>
+        <ExtraInfoBook bookImg={checkImg}/>
       </div>
-      <ExtraInfoBook bookImg={checkImg}/>
-    </div>
+    </>
   );
 };

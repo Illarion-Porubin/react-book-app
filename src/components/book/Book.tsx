@@ -22,7 +22,7 @@ export const Book: React.FC<Props> = ({ book, id }) => {
 
   return (
     <>
-      <div className={s.book} key={book.cover_i}>
+      <article className={s.book} key={book.cover_i}>
         <div className={s.book__wrap}>
           <img
             className={s.book__picture}
@@ -37,12 +37,11 @@ export const Book: React.FC<Props> = ({ book, id }) => {
           >
             Read more
           </Link>
-          <p className={s.book__title}>{book.title}</p>
+          <h4 className={s.book__title}>{book.title}</h4>
           <p className={s.book__subtitle}>{book.subtitle || book.title}</p>
           <p className={s.book__author}>{`Авторы: ${Authors}`}</p>
-     
         </div>
-      </div>
+      </article>
     </>
   );
 };

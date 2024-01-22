@@ -1,0 +1,13 @@
+.slide {
+    &__wrap_img {
+        width: 160px;
+        height: 260px;
+    }
+    &__img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+}
+
