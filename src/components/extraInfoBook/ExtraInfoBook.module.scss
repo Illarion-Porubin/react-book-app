@@ -5,7 +5,8 @@
     justify-content: center;
     margin: 200px 0;
 
-    &__title{
+    &__title,
+    &__title2{
         color: #393280;
         font-size: 38px;
         font-style: normal;
@@ -13,8 +14,13 @@
         line-height: normal;
         text-transform: capitalize;
         margin: 0;
-        margin-bottom: 30px;
         padding: 0;
+        margin-bottom: 30px;
+    }
+
+    &__title2{
+        margin-top: 30px;
+        font-size: 32px;
     }
 
     &__items{

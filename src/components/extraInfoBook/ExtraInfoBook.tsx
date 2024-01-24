@@ -2,7 +2,9 @@ import React from "react";
 import s from "./ExtraInfoBook.module.scss";
 import { useCustomSelector } from "../../hooks/store";
 import { selectBookData } from "../../redux/selectors";
-import { SlickSlider } from "../slider/SlickSlider";
+import { ReactSwiper } from "../swiper/ReactSwiper";
+
+
 
 interface Props {
   bookImg: string;
@@ -10,10 +12,9 @@ interface Props {
 
 export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
   const data = useCustomSelector(selectBookData);
-  const extraInfo =
-    data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
+  const extraInfo = data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
 
-  console.log(extraInfo);
+  console.log(extraInfo, 'extraInfo');
 
 
   return (
@@ -88,8 +89,8 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         </div>
         <details className={s.extra__info_details}>
           <summary>Рубрики</summary>
-          {extraInfo.subject.map((item: any) => (
-            <a className={s.extra__info_link} href="/#">
+          {extraInfo.subject.map((item: any, id: number) => (
+            <a className={s.extra__info_link} href="/#" key={id}>
               {item}
             </a>
           ))}
@@ -116,8 +117,8 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         </p>
 
         {/* <Paginate/> */}
-        <p>You might also like</p>
-        <SlickSlider/>
+        <p className={s.extra__title2}>You might also like</p>
+        <ReactSwiper subject={extraInfo.subject_key[0]}/>
       </main>
     </section>
   );

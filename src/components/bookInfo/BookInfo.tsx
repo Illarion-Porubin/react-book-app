@@ -3,7 +3,6 @@ import s from "./BookInfo.module.scss";
 import notFoundImg from "../../assets/jpg/cover_not_found.jpg";
 import { Link, useParams } from "react-router-dom";
 import { Loader } from "../loader/Loader";
-// import { BookInfoType } from "../../types/types";
 import { useCustomDispatch, useCustomSelector } from "../../hooks/store";
 import { selectBookData } from "../../redux/selectors";
 import { fetchBookInfo } from "../../redux/slices/bookSlice";
@@ -51,7 +50,9 @@ export const BookInfo: React.FC = () => {
     data.bookInfo ? data.bookInfo.last_modified.value : ""
   ).toLocaleDateString();
 
+
   if (data.isLoading === "loading") return <Loader />;
+
 
   return (
     <>

@@ -22,13 +22,11 @@ export const fetchBookSearch = createAsyncThunk<
   }
 });
 
-export const fetchBookInfo = createAsyncThunk<
-  any,
-  any,
-  { rejectValue: string }
+export const fetchBookInfo = createAsyncThunk<any,any,{ rejectValue: string }
 >("api/fetchBookInfo", async (bookId: string, { rejectWithValue }) => {
   try {
     if (bookId) {
+      console.log(bookId, 'bookId');
       const URL = `https://openlibrary.org/works/${bookId}.json`;
       const { data } = await axios.get(URL);
       const { subjects, title, description, created, covers, last_modified } =
