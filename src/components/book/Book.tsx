@@ -15,10 +15,10 @@ export const Book: React.FC<Props> = ({ book, id }) => {
   const BookImg = book.cover_edition_key
     ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`
     : notFoundImg;
-  const Authors =
-    book.author_name.length > 2
-      ? book.author_name?.slice(0, 2)
-      : book.author_name;
+  // const Authors =
+  //   book.author_name.length > 2
+  //     ? book.author_name?.slice(0, 2)
+  //     : book.author_name;
 
   return (
     <>
@@ -39,7 +39,7 @@ export const Book: React.FC<Props> = ({ book, id }) => {
           </Link>
           <h4 className={s.book__title}>{book.title}</h4>
           <p className={s.book__subtitle}>{book.subtitle || book.title}</p>
-          <p className={s.book__author}>{`Авторы: ${Authors}`}</p>
+          {/* <p className={s.book__author}>{`Авторы: ${Authors}`}</p> */}
         </div>
       </article>
     </>

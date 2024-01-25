@@ -1,14 +1,8 @@
 export interface BookInfoType {
-  covers: number[];
-  created: {
-    value: string;
-  };
-  last_modified: {
-    value: string;
-  };
-  description: {
-    value: string | "There is no description";
-  };
+  covers: string;
+  created: string;
+  last_modified: string;
+  description: string;
   subjects: string[];
   title: string;
 }

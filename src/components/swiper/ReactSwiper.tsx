@@ -12,6 +12,7 @@ import "swiper/css/scrollbar";
 import { useCustomDispatch } from "../../hooks/store";
 import { fetchBookInfo, bookSlice } from "../../redux/slices/bookSlice";
 import { Link } from "react-router-dom";
+import imgNotFound from "../../assets/jpg/cover_not_found.jpg";
 
 interface Props {
   subject: string[];
@@ -61,24 +62,23 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
       >
         {dopBookList.map((item: any, id: number) => (
           <SwiperSlide key={id}>
-            <div
-              className={s.slide}
-              onClick={() =>
-                dispatch(fetchBookInfo(item.key.replace("/works/", "")))
-              }
-            >
-              <img
-                className={s.slide__img}
-                src={`https://covers.openlibrary.org/b/id/${item.cover_id}-M.jpg`}
-                alt="slide__img"
-              />
-            </div>
             <Link
               className={s.book__popup_btn}
               to={`/book/${item.key.replace("/works/", "")}`}
               onClick={() => dispatch(bookSlice.actions.addId(id))}
             >
-              Read more
+              <div
+                className={s.slide}
+                onClick={() =>
+                  dispatch(fetchBookInfo(item.key.replace("/works/", "")))
+                }
+              >
+                <img
+                  className={s.slide__img}
+                  src={item.cover_id ? `https://covers.openlibrary.org/b/id/${item.cover_id}-M.jpg` : imgNotFound}
+                  alt="slide__img"
+                />
+              </div>
             </Link>
           </SwiperSlide>
         ))}

@@ -14,8 +14,6 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
   const data = useCustomSelector(selectBookData);
   const extraInfo = data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
 
-  console.log(extraInfo, 'extraInfo');
-
 
   return (
     <section className={s.extra}>
@@ -113,9 +111,8 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         </p>
         <p className={s.extra__text}>
           <span className={s.extra__info_span}></span>
-          {data.bookInfo?.description.value}
+          {data.bookInfo?.description}
         </p>
-
         {/* <Paginate/> */}
         <p className={s.extra__title2}>You might also like</p>
         <ReactSwiper subject={extraInfo.subject_key[0]}/>
