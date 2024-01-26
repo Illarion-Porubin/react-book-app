@@ -6,3 +6,13 @@ export interface BookInfoType {
   subjects: string[];
   title: string;
 }
+
+
+export interface BookType {
+  author_name: string[];
+  cover_edition_key: string;
+  key: string;
+  subject_key: string;
+  subtitle: string;
+  title: string;
+}

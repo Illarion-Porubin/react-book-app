@@ -38,6 +38,7 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
   }, [subject.length]);
 
   const fetchDopList = React.useCallback(async () => {
+    // const FIELDS = `&fields=authors,cover_id,cover_edition_key,key,title,subject`
     const res = await axios.get(
       `https://openlibrary.org/subjects/${subject[rundomNum()]}.json`
     );
@@ -49,6 +50,9 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
   React.useEffect(() => {
     fetchDopList();
   }, [fetchDopList]);
+
+
+  console.log(dopBookList, 'dopBookList');
 
   return (
     <>

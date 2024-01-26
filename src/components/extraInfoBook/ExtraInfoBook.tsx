@@ -3,6 +3,7 @@ import s from "./ExtraInfoBook.module.scss";
 import { useCustomSelector } from "../../hooks/store";
 import { selectBookData } from "../../redux/selectors";
 import { ReactSwiper } from "../swiper/ReactSwiper";
+import SadSmiley from "../../assets/png/sad_smiley.png";
 
 
 
@@ -13,6 +14,9 @@ interface Props {
 export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
   const data = useCustomSelector(selectBookData);
   const extraInfo = data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
+
+  console.log(data, 'data');
+  console.log(extraInfo, 'extraInfo');
 
 
   return (
@@ -87,11 +91,16 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         </div>
         <details className={s.extra__info_details}>
           <summary>Рубрики</summary>
-          {extraInfo.subject.map((item: any, id: number) => (
-            <a className={s.extra__info_link} href="/#" key={id}>
-              {item}
-            </a>
-          ))}
+          {
+            extraInfo.subject ?
+            extraInfo.subject.map((item: string, id: number) => (
+              <a className={s.extra__info_link} href="/#" key={id}>
+                {item}
+              </a>
+            ))
+            :
+            <p className={s.extra__info_link}>No data available</p>
+          }
         </details>
         <p className={s.extra__info}>
           <span className={s.extra__info_span}>Издатели: </span>
@@ -114,8 +123,20 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
           {data.bookInfo?.description}
         </p>
         {/* <Paginate/> */}
-        <p className={s.extra__title2}>You might also like</p>
-        <ReactSwiper subject={extraInfo.subject_key[0]}/>
+        {
+          extraInfo?.subject_key ?
+          <>
+            <p className={s.extra__title2}>You might also like</p>
+            <ReactSwiper subject={extraInfo?.subject_key}/>
+          </>
+          :
+          <>
+            <p className={s.extra__title2}>Unfortunately, there is nothing like it.</p>
+            <div className={s.extra__sad_smile_wrap}>
+              <img className={s.extra__sad_smile} src={SadSmiley} alt="SadSmiley" />
+            </div>
+          </>
+        }
       </main>
     </section>
   );

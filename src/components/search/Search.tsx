@@ -4,7 +4,7 @@ import { useDebounce } from "../../hooks/useDebounce";
 import { useCustomDispatch } from "../../hooks/store";
 import { fetchBookSearch } from "../../redux/slices/bookSlice";
 
-export const Search = () => {
+export const Search:React.FC = () => {
   const [findValue, setFindValue] = React.useState<string | null>(null);
   const debounce = useDebounce(findValue || '', 600);
   const dispatch = useCustomDispatch();

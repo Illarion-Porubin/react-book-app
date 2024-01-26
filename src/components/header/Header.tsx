@@ -4,7 +4,7 @@ import { Icons } from "../icons/Icons";
 import logo from '../../assets/png/logo.png';
 import { BurgerMenu } from "../burgerMenu/BurgerMenu";
 
-export const Header = () => {
+export const Header: React.FC = () => {
   return (
     <div className={s.header}>
       <a href="/#" className={s.header__logo}>

@@ -5,7 +5,7 @@ import facebook from "../../assets/svg/facebook2.svg";
 import twitter from "../../assets/svg/twitter2.svg";
 import youtoob from "../../assets/svg/youtoob2.svg";
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <div className="container">
       <div className={s.footer}>

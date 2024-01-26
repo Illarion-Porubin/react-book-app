@@ -1,9 +1,9 @@
 import React from "react";
 import s from "./BillBoard.module.scss";
-import billboard from "../../assets/png/poster.png";
+import poster from "../../assets/png/poster4.png";
 import { Search } from "../search/Search";
 
-export const BillBoard = () => {
+export const BillBoard: React.FC = () => {
   return (
     <div className={s.billboard}>
       <div className={s.billboard__content}>
@@ -16,7 +16,7 @@ export const BillBoard = () => {
         <Search />
       </div>
       <div className={s.billboard__img_wrap}>
-        <img className={s.billboard__img} src={billboard} alt="billboard" />
+        <img className={s.billboard__img} src={poster} alt="billboard" />
       </div>
     </div>
   );

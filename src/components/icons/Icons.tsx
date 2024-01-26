@@ -4,7 +4,7 @@ import facebook from "../../assets/svg/facebook.svg";
 import instagram from "../../assets/svg/instagram.svg";
 import twitter from "../../assets/svg/twitter.svg";
 
-export const Icons = () => {
+export const Icons: React.FC = () => {
   return (
     <div className={s.icons}>
       <a href="/#">

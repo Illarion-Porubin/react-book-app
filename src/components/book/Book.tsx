@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import notFoundImg from "../../assets/jpg/cover_not_found.jpg";
 import { useCustomDispatch } from "../../hooks/store";
 import { bookSlice } from "../../redux/slices/bookSlice";
+import { BookType } from "../../types/types";
 
 interface Props {
-  book: any;
+  book: BookType;
   id: number;
 }
 
@@ -15,14 +16,11 @@ export const Book: React.FC<Props> = ({ book, id }) => {
   const BookImg = book.cover_edition_key
     ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`
     : notFoundImg;
-  // const Authors =
-  //   book.author_name.length > 2
-  //     ? book.author_name?.slice(0, 2)
-  //     : book.author_name;
+
 
   return (
     <>
-      <article className={s.book} key={book.cover_i}>
+      <article className={s.book}>
         <div className={s.book__wrap}>
           <img
             className={s.book__picture}
@@ -38,8 +36,7 @@ export const Book: React.FC<Props> = ({ book, id }) => {
             Read more
           </Link>
           <h4 className={s.book__title}>{book.title}</h4>
-          <p className={s.book__subtitle}>{book.subtitle || book.title}</p>
-          {/* <p className={s.book__author}>{`Авторы: ${Authors}`}</p> */}
+          <p className={s.book__subtitle}>{book.subtitle || null}</p>
         </div>
       </article>
     </>

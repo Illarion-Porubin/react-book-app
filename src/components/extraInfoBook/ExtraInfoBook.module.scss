@@ -3,7 +3,7 @@
     height: auto;
     display: flex;
     justify-content: center;
-    margin: 200px 0;
+    margin: 90px 0;
 
     &__title,
     &__title2{
@@ -120,5 +120,19 @@
 
     &__categories {
         margin-bottom: 20px;
+    }
+
+    &__sad_smile_wrap{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+    }
+
+    &__sad_smile{
+        width: 200px;
+        height: 200px;
     }
 }

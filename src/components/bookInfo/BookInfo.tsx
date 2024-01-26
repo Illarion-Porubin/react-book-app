@@ -19,6 +19,7 @@ export const BookInfo: React.FC = () => {
   }, [dispatch, id]);
 
   const checkGenres = () => {
+    console.log(data.bookInfo?.subjects);
     if (data.bookInfo?.subjects) {
       const genres =
         data.bookInfo.subjects.length < 4
@@ -31,6 +32,8 @@ export const BookInfo: React.FC = () => {
       return "The author is not specified";
     }
   };
+
+  console.log(checkGenres());
 
   const checDesc = () => {
     if (data.bookInfo?.description) {
