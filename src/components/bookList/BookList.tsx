@@ -14,7 +14,6 @@ export const BookList: React.FC = () => {
 
   if(data.isLoading === 'loading') return <Loader/>
 
-
   return (
     data.bookList.length ?
     <div className="container">

@@ -16,7 +16,11 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
   const extraInfo = data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
 
   console.log(data, 'data');
-  console.log(extraInfo, 'extraInfo');
+  // console.log(extraInfo, 'extraInfo');
+
+  // рэйтинг
+  // https://openlibrary.org/works/OL18020194W/bookshelves.json
+  // https://openlibrary.org/works/OL18020194W/ratings.json  
 
 
   return (
@@ -53,70 +57,60 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         </div>
       </aside>
       <main className={s.extra__block}>
-        <h2 className={s.extra__title}>{extraInfo.title}</h2>
-        <h3 className={s.extra__title}>
-          {extraInfo.title_sort !== extraInfo.title
-            ? extraInfo.title_sort
-            : null}
-        </h3>
-        <h4 className={s.extra__title}>
-          {extraInfo.title_suggest !== extraInfo.title
-            ? extraInfo.title_suggest
-            : null}
-        </h4>
+        <h2 className={s.extra__title}>{data.bookInfo?.title}</h2>
         <div className={s.extra__items}>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
-              {String(extraInfo.ratings_average).slice(0, 4)} - рэйтинг книги
+              {/* {String(extraInfo.ratings_average).slice(0, 4)} - рэйтинг книги */}
             </li>
           </div>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
               <span className={s.extra__info_span}></span>
-              {extraInfo.ratings_count} - рэйтинг поиска
+              {/* {extraInfo.ratings_count} - рэйтинг поиска */}
             </li>
           </div>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
               <span className={s.extra__info_span}></span>
-              {extraInfo.readinglog_count} - уже прочли
+              {/* {extraInfo.readinglog_count} - уже прочли */}
             </li>
           </div>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
               <span className={s.extra__info_span}></span>
-              {extraInfo.want_to_read_count} - хотят прочеть{" "}
+              {/* {extraInfo.want_to_read_count} - хотят прочеть{" "} */}
             </li>
           </div>
         </div>
         <details className={s.extra__info_details}>
           <summary>Рубрики</summary>
           {
-            extraInfo.subject ?
-            extraInfo.subject.map((item: string, id: number) => (
-              <a className={s.extra__info_link} href="/#" key={id}>
-                {item}
-              </a>
-            ))
-            :
+            // extraInfo.subject ?
+            // extraInfo.subject.map((item: string, id: number) => (
+            //   <a className={s.extra__info_link} href="/#" key={id}>
+            //     {item}
+            //   </a>
+            // ))
+            // :
             <p className={s.extra__info_link}>No data available</p>
           }
         </details>
         <p className={s.extra__info}>
           <span className={s.extra__info_span}>Издатели: </span>
-          {`${extraInfo.publisher}`}
+          {/* {`${extraInfo.publisher}`} */}
         </p>
         <p className={s.extra__info}>
           <span className={s.extra__info_span}>Авторы: </span>
-          {`${extraInfo.author_name}`}
+          {/* {`${extraInfo.author_name}`} */}
         </p>
         <p className={s.extra__info}>
           <span className={s.extra__info_span}>Года публикаций: </span>
-          {`${extraInfo.publish_year}`}
+          {/* {`${extraInfo.publish_year}`} */}
         </p>
         <p className={s.extra__info}>
           <span className={s.extra__info_span}>Места публикаций: </span>
-          {extraInfo.publish_place}
+          {/* {extraInfo.publish_place} */}
         </p>
         <p className={s.extra__text}>
           <span className={s.extra__info_span}></span>
@@ -124,6 +118,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         </p>
         {/* <Paginate/> */}
         {
+          //  lowerCase and use replace for change shift 
           extraInfo?.subject_key ?
           <>
             <p className={s.extra__title2}>You might also like</p>

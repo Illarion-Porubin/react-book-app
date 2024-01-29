@@ -9,19 +9,21 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { useCustomDispatch } from "../../hooks/store";
-import { fetchBookInfo, bookSlice } from "../../redux/slices/bookSlice";
+import { useCustomDispatch, useCustomSelector } from "../../hooks/store";
+import { fetchBookInfo, bookSlice, fetchBookSlider } from "../../redux/slices/bookSlice";
 import { Link } from "react-router-dom";
 import imgNotFound from "../../assets/jpg/cover_not_found.jpg";
+import { selectBookData } from "../../redux/selectors";
+import { Loader } from "../loader/Loader";
 
 interface Props {
   subject: string[];
 }
 
 export const ReactSwiper: React.FC<Props> = ({ subject }) => {
-  const [dopBookList, setDopBookList] = React.useState([]);
-  const sliderRef = React.useRef<SwiperRef>(null);
   const dispatch = useCustomDispatch();
+  const sliderRef = React.useRef<SwiperRef>(null);
+  const [sliderList, setSliderList] = React.useState<any>([]);
 
   const handlePrev = React.useCallback(() => {
     if (!sliderRef.current) return;
@@ -33,26 +35,20 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
     sliderRef.current.swiper.slideNext();
   }, []);
 
-  const rundomNum = React.useCallback(() => {
-    return Math.floor(Math.random() * subject.length);
-  }, [subject.length]);
 
-  const fetchDopList = React.useCallback(async () => {
-    // const FIELDS = `&fields=authors,cover_id,cover_edition_key,key,title,subject`
-    const res = await axios.get(
-      `https://openlibrary.org/subjects/${subject[rundomNum()]}.json`
-    );
-    if (res.status === 200) {
-      setDopBookList(res.data.works);
-    }
-  }, [rundomNum, subject]);
+  const fetchSlider = React.useCallback(async () => {
+    const res = await dispatch(fetchBookSlider(subject));
+    console.log(res.payload);
+    setSliderList(res.payload)
+  }, [dispatch, subject])
 
   React.useEffect(() => {
-    fetchDopList();
-  }, [fetchDopList]);
+    fetchSlider()
+  }, [fetchSlider]);
 
 
-  console.log(dopBookList, 'dopBookList');
+
+  if(sliderList.length < 0) return <Loader/>
 
   return (
     <>
@@ -64,13 +60,13 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
         loopAdditionalSlides={4}
         ref={sliderRef}
       >
-        {dopBookList.map((item: any, id: number) => (
+        {sliderList.map((item: any, id: number) => (
           <SwiperSlide key={id}>
             <Link
               className={s.book__popup_btn}
               to={`/book/${item.key.replace("/works/", "")}`}
               onClick={() => dispatch(bookSlice.actions.addId(id))}
-            >
+              >
               <div
                 className={s.slide}
                 onClick={() =>
