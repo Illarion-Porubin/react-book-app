@@ -33,15 +33,6 @@ export const BookInfo: React.FC = () => {
   };
 
 
-  const checDesc = () => {
-    if (data.bookInfo?.description) {
-      return data.bookInfo?.description?.slice(0, 500) + "...";
-    } else {
-      return "There is no description";
-    }
-  };
-
-
   if (data.isLoading === "loading") return <Loader />;
 
   return (
@@ -60,7 +51,6 @@ export const BookInfo: React.FC = () => {
               <p className={s.book__info_text}>{`Жанры: ${checkGenres()}`}</p>
               <p className={s.book__info_text}>{`Издание: ${data.bookInfo?.created}`}</p>
               <p className={s.book__info_text}>{`Обновление: ${data.bookInfo?.last_modified}`}</p>
-              <p className={s.book__info_desc}>{checDesc()}</p>
             </div>
           </main>
         </section>

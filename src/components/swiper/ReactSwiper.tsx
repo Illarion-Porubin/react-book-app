@@ -38,7 +38,6 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
 
   const fetchSlider = React.useCallback(async () => {
     const res = await dispatch(fetchBookSlider(subject));
-    console.log(res.payload);
     setSliderList(res.payload)
   }, [dispatch, subject])
 

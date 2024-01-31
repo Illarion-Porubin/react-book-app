@@ -1,9 +1,12 @@
 import React from "react";
 import s from "./ExtraInfoBook.module.scss";
-import { useCustomSelector } from "../../hooks/store";
+import { useCustomDispatch, useCustomSelector } from "../../hooks/store";
 import { selectBookData } from "../../redux/selectors";
 import { ReactSwiper } from "../swiper/ReactSwiper";
 import SadSmiley from "../../assets/png/sad_smiley.png";
+import axios from "axios";
+import { fetchBooksRatings, fetchBookshelves } from "../../redux/slices/bookSlice";
+import { RatingsType, ShelvesType } from "../../types/types";
 
 
 
@@ -12,16 +15,47 @@ interface Props {
 }
 
 export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
+  // const extraInfo = data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
   const data = useCustomSelector(selectBookData);
-  const extraInfo = data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
+  const dispatch = useCustomDispatch();
+  const [shelves, setShelves] = React.useState<ShelvesType>();
+  const [ratings, setRatings] = React.useState<RatingsType>();
 
-  console.log(data, 'data');
-  // console.log(extraInfo, 'extraInfo');
+  const subjects = React.useMemo(() => data.bookInfo?.subjects.slice(0, 3).map((item: string) => {
+    return item.replace(/\s+/g, "_").toLowerCase()
+  }), [])
 
-  // рэйтинг
-  // https://openlibrary.org/works/OL18020194W/bookshelves.json
-  // https://openlibrary.org/works/OL18020194W/ratings.json  
 
+  const booksRatings = React.useCallback( async () => {
+    const res = await dispatch(fetchBooksRatings(data.bookKey))
+    if(res.payload){
+      setRatings(res.payload);
+    }
+  },[dispatch,data.bookKey])
+
+  const bookshelves = React.useCallback( async () => {
+    const res = await dispatch(fetchBookshelves(data.bookKey))
+    if(res.payload){
+      setShelves(res.payload);
+    }
+  },[dispatch,data.bookKey])
+
+  const authorInfo = React.useCallback(async  (authorKey: string) => {
+    const res = await axios.get(`https://openlibrary.org${authorKey}.json`)
+  }, [])
+
+  const authorPicture = async (authorKey: string) => {
+    const res = await axios.get(`https://covers.openlibrary.org/a/olid/${authorKey}-M.jpg`)
+  }
+
+
+  React.useEffect(() => {
+    booksRatings()
+    bookshelves()
+    if(data.bookInfo?.authors){
+      authorInfo(data.bookInfo?.authors[0].author.key)
+    }
+  }, [bookshelves, booksRatings, authorInfo, data.bookInfo?.authors])
 
   return (
     <section className={s.extra}>
@@ -61,38 +95,38 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         <div className={s.extra__items}>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
-              {/* {String(extraInfo.ratings_average).slice(0, 4)} - рэйтинг книги */}
+              {String(ratings?.summary.average).slice(0, 3)} - рэйтинг книги
             </li>
           </div>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
               <span className={s.extra__info_span}></span>
-              {/* {extraInfo.ratings_count} - рэйтинг поиска */}
+              {shelves?.counts.currently_reading || 0} - уже читают
             </li>
           </div>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
               <span className={s.extra__info_span}></span>
-              {/* {extraInfo.readinglog_count} - уже прочли */}
+              {shelves?.counts?.already_read || 0} - уже прочли
             </li>
           </div>
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
               <span className={s.extra__info_span}></span>
-              {/* {extraInfo.want_to_read_count} - хотят прочеть{" "} */}
+              {shelves?.counts.want_to_read || 0} - хотят прочеть{" "}
             </li>
           </div>
         </div>
         <details className={s.extra__info_details}>
           <summary>Рубрики</summary>
           {
-            // extraInfo.subject ?
-            // extraInfo.subject.map((item: string, id: number) => (
-            //   <a className={s.extra__info_link} href="/#" key={id}>
-            //     {item}
-            //   </a>
-            // ))
-            // :
+            data.bookInfo?.subjects ?
+            data.bookInfo?.subjects.map((item: string, id: number) => (
+              <a className={s.extra__info_link} href="/#" key={id}>
+                {item}
+              </a>
+            ))
+            :
             <p className={s.extra__info_link}>No data available</p>
           }
         </details>
@@ -116,13 +150,12 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
           <span className={s.extra__info_span}></span>
           {data.bookInfo?.description}
         </p>
-        {/* <Paginate/> */}
         {
           //  lowerCase and use replace for change shift 
-          extraInfo?.subject_key ?
+          subjects ?
           <>
             <p className={s.extra__title2}>You might also like</p>
-            <ReactSwiper subject={extraInfo?.subject_key}/>
+            <ReactSwiper subject={subjects}/>
           </>
           :
           <>

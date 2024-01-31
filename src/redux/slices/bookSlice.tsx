@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BookInfoType } from "../../types/types";
+import { BookInfoType, RatingsType, ShelvesType } from "../../types/types";
 import imgNotFound from "../../assets/jpg/cover_not_found.jpg";
 import axios from "axios";
 
@@ -11,6 +11,7 @@ export const fetchBookSearch = createAsyncThunk<string,string,{ rejectValue: str
       // const FIELDS = `&fields=key,title,author_name,subtitle,subject_key,cover_edition_key`;
       const URL = `https://openlibrary.org/search.json?title=${searchValue}${''}&lang=en&limit=12`;
       const { data } = await axios.get(URL);
+      console.log(data);
       if (!data) {
         return rejectWithValue("Server Error!");
       }
@@ -20,6 +21,38 @@ export const fetchBookSearch = createAsyncThunk<string,string,{ rejectValue: str
     return rejectWithValue("Can't fetchBookSearch");
   }
 });
+
+export const fetchBooksRatings = createAsyncThunk<RatingsType, any, {rejectValue: null}
+  >("api/fetchBooksRatings", async (bookKey, {rejectWithValue}) => {
+    try {
+      if(bookKey){
+        const {data} = await axios.get(`https://openlibrary.org/works/${bookKey}/ratings.json `);
+        if(data){
+          return data
+        }
+        return null;
+      }
+      return rejectWithValue(null);
+    } catch (error) {
+      return rejectWithValue(null);
+    }
+})
+
+export const fetchBookshelves = createAsyncThunk<ShelvesType, any, {rejectValue: null}
+  >("api/fetchBookshelves", async (bookKey, {rejectWithValue}) => {
+    try {
+      if(bookKey){
+        const {data} = await axios.get(`https://openlibrary.org/works/${bookKey}/bookshelves.json`);
+        if(data){
+          return data
+        }
+        return null;
+      }
+      return rejectWithValue(null);
+    } catch (error) {
+      return rejectWithValue(null);
+    }
+})
 
 export const fetchBookSlider = createAsyncThunk<any,any,{ rejectValue: string }
 >("api/fetchBookSlider", async (subject: string[], { rejectWithValue }) => {
@@ -45,9 +78,10 @@ export const fetchBookInfo = createAsyncThunk<any,any,{ rejectValue: string }
       const URL = `https://openlibrary.org/works/${bookKey}.json`;
       const { data } = await axios.get(URL);
       console.log(data, 'daaata');
-      const { subjects, title, description, created, covers, last_modified } = data;
+      const { subjects, title, description, created, covers, last_modified, authors } = data;
       if ({ data }) {
         const newData = {
+          authors: authors || null,
           subjects: subjects || null,
           title: title || 'Not title',
           description: description ? (typeof(description) === 'string' ? description : description.value) : 'No data available',
@@ -68,7 +102,7 @@ export interface BookState {
   bookList: any | [];
   bookInfo: BookInfoType | null;
   bookId: number | null;
-  bookKey: number | null;
+  bookKey: string | null;
   status: number | null;
   isLoading: "idle" | "loading" | "loaded" | "error";
   error: string | null;
