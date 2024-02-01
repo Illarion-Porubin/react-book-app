@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Book.module.scss";
 import { Link } from "react-router-dom";
-import notFoundImg from "../../assets/jpg/cover_not_found.jpg";
+import bookNotFound from "../../assets/jpg/cover_not_found.jpg";
 import { useCustomDispatch } from "../../hooks/store";
 import { bookSlice } from "../../redux/slices/bookSlice";
 import { BookType } from "../../types/types";
@@ -15,7 +15,7 @@ export const Book: React.FC<Props> = ({ book, id }) => {
   const dispatch = useCustomDispatch();
   const BookImg = book.cover_edition_key
     ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`
-    : notFoundImg;
+    : bookNotFound;
 
 
   return (

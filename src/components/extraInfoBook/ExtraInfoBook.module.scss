@@ -135,4 +135,12 @@
         width: 200px;
         height: 200px;
     }
+
+    //Author
+
+    &__book_picture{
+        width: 240px;
+        height: 300px;
+        object-fit: cover;
+    }
 }

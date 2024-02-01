@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BookInfoType, RatingsType, ShelvesType } from "../../types/types";
+import { AuthorType, BookInfoType, RatingsType, ShelvesType } from "../../types/types";
 import imgNotFound from "../../assets/jpg/cover_not_found.jpg";
 import axios from "axios";
 
@@ -84,10 +84,10 @@ export const fetchBookInfo = createAsyncThunk<any,any,{ rejectValue: string }
           authors: authors || null,
           subjects: subjects || null,
           title: title || 'Not title',
-          description: description ? (typeof(description) === 'string' ? description : description.value) : 'No data available',
-          created: created ? (typeof(created) === "string" ? new Date(created).toLocaleDateString() : new Date(created.value).toLocaleDateString()) : 'No data available',
-          covers: covers ? `https://covers.openlibrary.org/b/id/${covers[0]}-M.jpg` : imgNotFound,
-          last_modified: last_modified ? (typeof(last_modified) === 'string' ? new Date(last_modified).toLocaleDateString()  : new Date(last_modified.value).toLocaleDateString()) : 'No data available',
+          description: typeof(description) === 'string' ? description : description.value,
+          created: typeof(created) === "string" ? new Date(created).toLocaleDateString() : new Date(created.value).toLocaleDateString(),
+          covers: covers ? `https://covers.openlibrary.org/b/id/${covers[0]}-M.jpg` : null,
+          last_modified: typeof(last_modified) === 'string' ? new Date(last_modified).toLocaleDateString()  : new Date(last_modified.value).toLocaleDateString(),
         };
         return newData;
       }
@@ -97,13 +97,34 @@ export const fetchBookInfo = createAsyncThunk<any,any,{ rejectValue: string }
     return rejectWithValue("Cant't fetchBookInfo");
   }
 });
+///Author
+export const fetchBookAuthor = createAsyncThunk<any, string, {rejectValue: string}
+>("api/fetchBookAuthor", async (authorKey, { rejectWithValue }) => {
+  try {
+    if(authorKey){
+      const {data} = await axios.get(`https://openlibrary.org/authors/${authorKey}.json`);
+      console.log(data, '<<<<<<');
+      const { bio, personal_name, birth_date} = data;
+      const newData = {
+        bio: (typeof(bio) === 'string' ? bio : bio.value),
+        personal_name: personal_name || null,
+        birth_date: birth_date || null,
+      }
+      return newData
+    }
+    return rejectWithValue("Cant't data")
+  } catch (error) {
+    return rejectWithValue("Cant't fetchBookAuthor")
+  }
+})  
+
 
 export interface BookState {
   bookList: any | [];
   bookInfo: BookInfoType | null;
   bookId: number | null;
   bookKey: string | null;
-  status: number | null;
+  bookAuthor: AuthorType | null;
   isLoading: "idle" | "loading" | "loaded" | "error";
   error: string | null;
 }
@@ -113,7 +134,7 @@ export const initialState: BookState = {
   bookInfo: null,
   bookId: null,
   bookKey: null,
-  status: null,
+  bookAuthor: null,
   isLoading: "idle",
   error: null,
 };
@@ -157,6 +178,16 @@ export const bookSlice = createSlice({
       .addCase(fetchBookInfo.rejected, (state) => {
         state.bookInfo = null;
         state.isLoading = "error";
+      })
+      ///fetchBookAuthor
+      .addCase(fetchBookAuthor.pending, (state) => {
+        state.bookAuthor = null;
+      })
+      .addCase(fetchBookAuthor.fulfilled, (state, action) => {
+        state.bookAuthor = action.payload;
+      })
+      .addCase(fetchBookAuthor.rejected, (state) => {
+        state.bookAuthor = null;
       })
 
   },

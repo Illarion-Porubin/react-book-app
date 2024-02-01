@@ -7,6 +7,7 @@ import { selectBookData } from "../../redux/selectors";
 import { fetchBookInfo } from "../../redux/slices/bookSlice";
 import { ExtraInfoBook } from "../extraInfoBook/ExtraInfoBook";
 import { bookSlice } from "../../redux/slices/bookSlice";
+import bookNotFound from "../../assets/jpg/cover_not_found.jpg";
 
 export const BookInfo: React.FC = () => {
   const dispatch = useCustomDispatch();
@@ -44,13 +45,13 @@ export const BookInfo: React.FC = () => {
         <section>
           <main className={s.book}>
             <div className={s.book__img_wrap}>
-              <img className={s.book__img} src={data.bookInfo?.covers} alt="book__img" />
+              <img className={s.book__img} src={data.bookInfo?.covers || bookNotFound} alt="book__img" />
             </div>
             <div className={s.book__info}>
               <h1 className={s.book__info_title}>{data.bookInfo?.title}</h1>
               <p className={s.book__info_text}>{`Жанры: ${checkGenres()}`}</p>
-              <p className={s.book__info_text}>{`Издание: ${data.bookInfo?.created}`}</p>
-              <p className={s.book__info_text}>{`Обновление: ${data.bookInfo?.last_modified}`}</p>
+              <p className={s.book__info_text}>{`Издание: ${data.bookInfo?.created || 'No data available'}`}</p>
+              <p className={s.book__info_text}>{`Обновление: ${data.bookInfo?.last_modified || 'No data available'}`}</p>
             </div>
           </main>
         </section>

@@ -38,3 +38,9 @@ export interface RatingsType {
     sortable: number;
   }
 } 
+
+export interface AuthorType {
+  bio: string;
+  personal_name: string
+  birth_date: string
+}
