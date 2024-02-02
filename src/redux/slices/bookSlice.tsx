@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { AuthorType, BookInfoType, RatingsType, ShelvesType } from "../../types/types";
-import imgNotFound from "../../assets/jpg/cover_not_found.jpg";
+import { AuthorType, BookInfoType, BookType, RatingsType, ShelvesType, SliderType } from "../../types/types";
 import axios from "axios";
 
 export const fetchBookSearch = createAsyncThunk<string,string,{ rejectValue: string }
@@ -53,8 +52,8 @@ export const fetchBookshelves = createAsyncThunk<ShelvesType, any, {rejectValue:
       return rejectWithValue(null);
     }
 })
-
-export const fetchBookSlider = createAsyncThunk<any,any,{ rejectValue: string }
+/////////////////////////////////////////
+export const fetchBookSlider = createAsyncThunk<BookType[], string[],{ rejectValue: string }
 >("api/fetchBookSlider", async (subject: string[], { rejectWithValue }) => {
   try {
     if (subject) {
@@ -70,25 +69,26 @@ export const fetchBookSlider = createAsyncThunk<any,any,{ rejectValue: string }
     return rejectWithValue("Cant't fetchBookSlider");
   }
 });
-
+///////////////////////////////////////
 export const fetchBookInfo = createAsyncThunk<any,any,{ rejectValue: string }
 >("api/fetchBookInfo", async (bookKey: string, { rejectWithValue }) => {
   try {
     if (bookKey) {
       const URL = `https://openlibrary.org/works/${bookKey}.json`;
       const { data } = await axios.get(URL);
-      console.log(data, 'daaata');
       const { subjects, title, description, created, covers, last_modified, authors } = data;
+      console.log(data, '<<<<<');
       if ({ data }) {
         const newData = {
           authors: authors || null,
           subjects: subjects || null,
-          title: title || 'Not title',
-          description: typeof(description) === 'string' ? description : description.value,
+          title: title || null,
+          description:  description ? (typeof(description) === 'string' ? description : description.value) : '',
           created: typeof(created) === "string" ? new Date(created).toLocaleDateString() : new Date(created.value).toLocaleDateString(),
           covers: covers ? `https://covers.openlibrary.org/b/id/${covers[0]}-M.jpg` : null,
           last_modified: typeof(last_modified) === 'string' ? new Date(last_modified).toLocaleDateString()  : new Date(last_modified.value).toLocaleDateString(),
         };
+        console.log(newData, "sadasdasd");
         return newData;
       }
       return rejectWithValue("Cant't data");
@@ -97,18 +97,22 @@ export const fetchBookInfo = createAsyncThunk<any,any,{ rejectValue: string }
     return rejectWithValue("Cant't fetchBookInfo");
   }
 });
+
 ///Author
-export const fetchBookAuthor = createAsyncThunk<any, string, {rejectValue: string}
+
+export const fetchBookAuthor = createAsyncThunk<AuthorType, string, {rejectValue: string}
 >("api/fetchBookAuthor", async (authorKey, { rejectWithValue }) => {
   try {
     if(authorKey){
       const {data} = await axios.get(`https://openlibrary.org/authors/${authorKey}.json`);
       console.log(data, '<<<<<<');
-      const { bio, personal_name, birth_date} = data;
-      const newData = {
+      const { bio, personal_name, birth_date, wikipedia, death_date} = data;
+      const newData: AuthorType = {
         bio: (typeof(bio) === 'string' ? bio : bio.value),
         personal_name: personal_name || null,
         birth_date: birth_date || null,
+        death_date: death_date || null,
+        wikipedia: wikipedia || null,
       }
       return newData
     }

@@ -17,6 +17,7 @@ export interface BookType {
   author_name: string[];
   cover_edition_key: string;
   key: string;
+  cover_id: string
   subject_key: string;
   subtitle: string;
   title: string;
@@ -40,7 +41,14 @@ export interface RatingsType {
 } 
 
 export interface AuthorType {
-  bio: string;
-  personal_name: string
-  birth_date: string
+  bio: string | null;
+  personal_name: string | null;
+  birth_date: string | null;
+  death_date: string | null;
+  wikipedia: string | null;
+}
+
+export interface SliderType {
+  cover_id: string | null;
+  key: string | null;
 }

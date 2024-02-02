@@ -138,9 +138,31 @@
 
     //Author
 
-    &__book_picture{
+    &__book_author_title{
+        margin-bottom: 40px;
+    }
+
+    &__book_author_wrap{
         width: 240px;
         height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    &__book_picture{
+        width: 100%;
+        height: 100%;
         object-fit: cover;
+    }
+
+    &__book_author_bio{
+        margin-bottom: 20px;
+    }
+
+    &__book_author_wiki{
+        color: #0f3cb9;
     }
 }

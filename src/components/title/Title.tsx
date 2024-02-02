@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Title.module.scss";
 
-export const Title = () => {
+export const Title: React.FC = () => {
   return (
     <div className={s.title}>
       <span className={s.title__span}/>

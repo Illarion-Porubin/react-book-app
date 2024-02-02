@@ -5,7 +5,6 @@ import { selectBookData } from "../../redux/selectors";
 import { ReactSwiper } from "../swiper/ReactSwiper";
 import noPhoto from "../../assets/png/no_photo.png";
 import SadSmiley from "../../assets/png/sad_smiley.png";
-import axios from "axios";
 import {
   fetchBookAuthor,
   fetchBooksRatings,
@@ -18,17 +17,14 @@ interface Props {
 }
 
 export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
-  // const extraInfo = data.bookId !== null ? data.bookList[data.bookId] : "ID не найден";
   const data = useCustomSelector(selectBookData);
   const dispatch = useCustomDispatch();
   const [shelves, setShelves] = React.useState<ShelvesType>();
   const [ratings, setRatings] = React.useState<RatingsType>();
-  const [authorInf, setAuthorInf] = React.useState<any>();
-  const authorKey =
-    data.bookInfo?.authors[0].author.key.replace("/authors/", "") || "";
+  const authorKey = data.bookInfo?.authors[0].author.key.replace("/authors/", "") || "";
 
-  const subjects = React.useMemo(
-    () =>
+
+  const subjects = React.useMemo(() =>
       data.bookInfo?.subjects.slice(0, 3).map((item: string) => {
         return item.replace(/\s+/g, "_").toLowerCase();
       }),
@@ -49,20 +45,14 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
     }
   }, [dispatch, data.bookKey]);
 
-  const getAuthorInfo = React.useCallback(async () => {
-    if (authorKey) {
-      const res = await dispatch(fetchBookAuthor(authorKey));
-      setAuthorInf(res.payload);
-    }
-  }, [dispatch, authorKey]);
+
 
   React.useEffect(() => {
     getBooksRatings();
     getBookshelves();
-    getAuthorInfo();
-  }, [getBookshelves, getBooksRatings, getAuthorInfo]);
+    dispatch(fetchBookAuthor(authorKey))
+  }, [dispatch, getBookshelves, getBooksRatings, authorKey]);
 
-  console.log(authorInf);
 
   return (
     <section className={s.extra}>
@@ -120,35 +110,34 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
           <div className={s.extra__item}>
             <li className={s.extra__item_text}>
               <span className={s.extra__info_span}></span>
-              {shelves?.counts.want_to_read || 0} - хотят прочеть{" "}
+              {shelves?.counts.want_to_read || 0} - хотят прочесть
             </li>
           </div>
         </div>
-        <article>
-          <h3>Краткая биография автора</h3>
-          <img
-            className={s.extra__book_picture}
-            src={`https://covers.openlibrary.org/a/olid/${authorKey}.jpg` || noPhoto}
-            alt="authorPicture"
-          />
-          <p>
+
+        <section className={s.extra__book_author}>
+          <h3 className={s.extra__book_author_title}>Краткая биография автора</h3>
+          <div className={s.extra__book_author_wrap}>
+            <img
+              className={s.extra__book_picture}
+              src={`https://covers.openlibrary.org/a/olid/${authorKey}.jpg` || noPhoto}
+              alt="authorPicture"
+            />
+            <p>{data.bookAuthor?.personal_name}</p>
+            <p>{`${data.bookAuthor?.birth_date?.slice(-4) || ''} ${data.bookAuthor?.death_date ? '-' + data.bookAuthor?.death_date?.slice(-4) : ''}`}</p>
+          </div>
+          <p className={s.extra__book_author_bio}>
             {data.bookAuthor?.bio || "There is no biography for this author."}
           </p>
-        </article>
-        
+            {
+              data.bookAuthor?.wikipedia 
+              ?
+              <a className={s.extra__book_author_wiki} href={data.bookAuthor?.wikipedia}>Link to Wikipedia</a>
+              :
+              null
+            }  
+        </section>
 
-        {/* <p className={s.extra__info}>
-          <span className={s.extra__info_span}>Издатели: </span>
-        </p>
-        <p className={s.extra__info}>
-          <span className={s.extra__info_span}>Авторы: </span>
-        </p>
-        <p className={s.extra__info}>
-          <span className={s.extra__info_span}>Года публикаций: </span>
-        </p>
-        <p className={s.extra__info}>
-          <span className={s.extra__info_span}>Места публикаций: </span>
-        </p> */}
         <h3>Описание</h3>
         <p className={s.extra__text}>
           <span className={s.extra__info_span}></span>
@@ -157,7 +146,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         <details className={s.extra__info_details}>
           <summary>Рубрики</summary>
           {data.bookInfo?.subjects.map((item: string, id: number) => (
-            <a className={s.extra__info_link} href="/#" key={id}>
+            <a className={s.extra__info_link} href={`https://openlibrary.org/subjects/${item.replace(/\s+/g, "_").toLowerCase()}`} key={id}>
               {item}
             </a>
           ))}

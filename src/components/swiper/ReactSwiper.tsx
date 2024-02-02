@@ -9,12 +9,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { useCustomDispatch, useCustomSelector } from "../../hooks/store";
+import { useCustomDispatch } from "../../hooks/store";
 import { fetchBookInfo, bookSlice, fetchBookSlider } from "../../redux/slices/bookSlice";
 import { Link } from "react-router-dom";
 import imgNotFound from "../../assets/jpg/cover_not_found.jpg";
-import { selectBookData } from "../../redux/selectors";
 import { Loader } from "../loader/Loader";
+import { BookType } from "../../types/types";
 
 interface Props {
   subject: string[];
@@ -23,7 +23,7 @@ interface Props {
 export const ReactSwiper: React.FC<Props> = ({ subject }) => {
   const dispatch = useCustomDispatch();
   const sliderRef = React.useRef<SwiperRef>(null);
-  const [sliderList, setSliderList] = React.useState<any>([]);
+  const [sliderList, setSliderList] = React.useState<string | BookType[]>();
 
   const handlePrev = React.useCallback(() => {
     if (!sliderRef.current) return;
@@ -38,7 +38,8 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
 
   const fetchSlider = React.useCallback(async () => {
     const res = await dispatch(fetchBookSlider(subject));
-    setSliderList(res.payload)
+    const data = res.payload
+    setSliderList(data)
   }, [dispatch, subject])
 
   React.useEffect(() => {
@@ -46,8 +47,7 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
   }, [fetchSlider]);
 
 
-
-  if(sliderList.length < 0) return <Loader/>
+  if(Array.isArray(sliderList) ? sliderList.length < 0 : null) return <Loader/>
 
   return (
     <>
@@ -55,32 +55,36 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
         modules={[Navigation]}
         spaceBetween={50}
         slidesPerView={4}
-        // slidesPerGroup={4}
         loopAdditionalSlides={4}
         ref={sliderRef}
       >
-        {sliderList.map((item: any, id: number) => (
-          <SwiperSlide key={id}>
-            <Link
-              className={s.book__popup_btn}
-              to={`/book/${item.key.replace("/works/", "")}`}
-              onClick={() => dispatch(bookSlice.actions.addId(id))}
-              >
-              <div
-                className={s.slide}
-                onClick={() =>
-                  dispatch(fetchBookInfo(item.key.replace("/works/", "")))
-                }
-              >
-                <img
-                  className={s.slide__img}
-                  src={item.cover_id ? `https://covers.openlibrary.org/b/id/${item.cover_id}-M.jpg` : imgNotFound}
-                  alt="slide__img"
-                />
-              </div>
-            </Link>
-          </SwiperSlide>
-        ))}
+        {
+          Array.isArray(sliderList) ?
+          sliderList.map((item: BookType, id: number) => (
+            <SwiperSlide key={id}>
+              <Link
+                className={s.book__popup_btn}
+                to={`/book/${item.key.replace("/works/", "")}`}
+                onClick={() => dispatch(bookSlice.actions.addId(id))}
+                >
+                <div
+                  className={s.slide}
+                  onClick={() =>
+                    dispatch(fetchBookInfo(item.key.replace("/works/", "")))
+                  }
+                >
+                  <img
+                    className={s.slide__img}
+                    src={item.cover_id ? `https://covers.openlibrary.org/b/id/${item.cover_id}-M.jpg` : imgNotFound}
+                    alt="slide__img"
+                  />
+                </div>
+              </Link>
+            </SwiperSlide>
+          ))
+          :
+          <p>No matches were found or an error occurred</p>
+        }
         <button className={`${s.arrow} ${s.next}`} onClick={handleNext}>
           <svg
             width="62"

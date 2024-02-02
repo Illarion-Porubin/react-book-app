@@ -33,6 +33,7 @@ export const BookInfo: React.FC = () => {
     }
   };
 
+  console.log(id);
 
   if (data.isLoading === "loading") return <Loader />;
 
