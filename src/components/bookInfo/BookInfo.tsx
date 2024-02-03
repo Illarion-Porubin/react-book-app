@@ -16,7 +16,12 @@ export const BookInfo: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(bookSlice.actions.addKey(id));
-    dispatch(fetchBookInfo(id));
+    if(id){
+      dispatch(fetchBookInfo(id));
+    }
+    else{
+      window.alert("Couldn't find the ID")
+    }
   }, [dispatch, id]);
 
   const checkGenres = () => {
@@ -33,7 +38,6 @@ export const BookInfo: React.FC = () => {
     }
   };
 
-  console.log(id);
 
   if (data.isLoading === "loading") return <Loader />;
 

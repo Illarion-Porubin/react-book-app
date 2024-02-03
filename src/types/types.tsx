@@ -1,15 +1,22 @@
 export interface BookInfoType {
-  covers: string;
+  covers: string | null;
   authors: {
     author: {
-      key: string
+      key: string;
     }
   }[];
-  created: string;
-  last_modified: string;
-  description: string;
-  subjects: string[];
-  title: string;
+  created: string | null;
+  last_modified: string | null;
+  description: string | null;
+  subjects: string[] | null;
+  title: string | null;
+}
+
+export interface SearchType {
+  cover_edition_key: string | null;
+  subtitle: string | null;
+  key: string | null;
+  title: string | null;
 }
 
 
@@ -48,7 +55,12 @@ export interface AuthorType {
   wikipedia: string | null;
 }
 
-export interface SliderType {
-  cover_id: string | null;
-  key: string | null;
+export interface BookState {
+  bookList: SearchType[] | [];
+  bookInfo: BookInfoType | null;
+  bookId: number | null;
+  bookKey: string | null;
+  bookAuthor: AuthorType | null;
+  isLoading: "idle" | "loading" | "loaded" | "error";
+  error: string | null;
 }

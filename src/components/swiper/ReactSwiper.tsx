@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import s from "./ReactSwiper.module.scss";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";

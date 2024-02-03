@@ -6,14 +6,14 @@ import { BurgerMenu } from "../burgerMenu/BurgerMenu";
 
 export const Header: React.FC = () => {
   return (
-    <div className={s.header}>
+    <section className={s.header}>
       <a href="/#" className={s.header__logo}>
-        <img className={s.header__logo_img} src={logo} alt="l" />
+        <img className={s.header__logo_img} src={logo} alt="logo" />
       </a>
       <div className={s.header__assets}>
         <Icons/>
         <BurgerMenu/>
       </div>
-    </div>
+    </section>
   );
 };

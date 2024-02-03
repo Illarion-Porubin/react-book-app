@@ -5,7 +5,7 @@ import { Book } from "../book/Book";
 import { Loader } from "../loader/Loader";
 import { useCustomSelector } from "../../hooks/store";
 import { selectBookData } from "../../redux/selectors";
-import { BookType } from "../../types/types";
+import { SearchType } from "../../types/types";
 
 
 
@@ -19,7 +19,7 @@ export const BookList: React.FC = () => {
     <div className="container">
       <section className={s.booklist}>
       <Title />
-        {data.bookList.map((item: BookType, id: number) => (
+        {data.bookList.map((item: SearchType, id: number) => (
           <Book book={item} id={id} key={id} />
         ))}
       </section>

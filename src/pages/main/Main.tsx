@@ -11,7 +11,6 @@ export const Main = () => {
       <Menu />
       <BillBoard />
       <BookList />
-      {/* <Footer/> */}
     </>
   );
 };

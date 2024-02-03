@@ -21,38 +21,44 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
   const dispatch = useCustomDispatch();
   const [shelves, setShelves] = React.useState<ShelvesType>();
   const [ratings, setRatings] = React.useState<RatingsType>();
-  const authorKey = data.bookInfo?.authors[0].author.key.replace("/authors/", "") || "";
+  const authorKey =
+    data.bookInfo?.authors[0].author.key.replace("/authors/", "") || "";
 
-
-  const subjects = React.useMemo(() =>
-      data.bookInfo?.subjects.slice(0, 3).map((item: string) => {
+  const subjects = React.useMemo(
+    () =>
+      data.bookInfo?.subjects?.slice(0, 3).map((item: string) => {
         return item.replace(/\s+/g, "_").toLowerCase();
       }),
     [data.bookInfo?.subjects]
   );
 
   const getBooksRatings = React.useCallback(async () => {
-    const res = await dispatch(fetchBooksRatings(data.bookKey));
-    if (res.payload) {
-      setRatings(res.payload);
+    if (data.bookKey) {
+      const res = await dispatch(fetchBooksRatings(data.bookKey));
+      if (res.payload) {
+        setRatings(res.payload);
+      }
+    } else {
+      window.alert("Couldn't find the ID");
     }
   }, [dispatch, data.bookKey]);
 
   const getBookshelves = React.useCallback(async () => {
-    const res = await dispatch(fetchBookshelves(data.bookKey));
-    if (res.payload) {
-      setShelves(res.payload);
+    if (data.bookKey) {
+      const res = await dispatch(fetchBookshelves(data.bookKey));
+      if (res.payload) {
+        setShelves(res.payload);
+      }
+    } else {
+      window.alert("Couldn't find the ID");
     }
   }, [dispatch, data.bookKey]);
-
-
 
   React.useEffect(() => {
     getBooksRatings();
     getBookshelves();
-    dispatch(fetchBookAuthor(authorKey))
+    dispatch(fetchBookAuthor(authorKey));
   }, [dispatch, getBookshelves, getBooksRatings, authorKey]);
-
 
   return (
     <section className={s.extra}>
@@ -91,51 +97,69 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         <h2 className={s.extra__title}>{data.bookInfo?.title}</h2>
         <div className={s.extra__items}>
           <div className={s.extra__item}>
-            <li className={s.extra__item_text}>
-              {String(ratings?.summary.average).slice(0, 3)} - рэйтинг книги
+            <li className={s.extra__item_li}>
+              <p className={s.extr}>
+                {String(ratings?.summary.average).slice(0, 3)} - рэйтинг книги
+              </p>
+            </li> 
+          </div>
+          <div className={s.extra__item}>
+            <li className={s.extra__item_li}>
+              <p className={s.extr}>
+                <span className={s.extra__info_span}></span>
+                {shelves?.counts.currently_reading || 0} - уже читают
+              </p>
             </li>
           </div>
           <div className={s.extra__item}>
-            <li className={s.extra__item_text}>
-              <span className={s.extra__info_span}></span>
-              {shelves?.counts.currently_reading || 0} - уже читают
+            <li className={s.extra__item_li}>
+              <p className={s.extr}>
+                <span className={s.extra__info_span}></span>
+                {shelves?.counts?.already_read || 0} - уже прочли
+              </p>
             </li>
           </div>
           <div className={s.extra__item}>
-            <li className={s.extra__item_text}>
-              <span className={s.extra__info_span}></span>
-              {shelves?.counts?.already_read || 0} - уже прочли
-            </li>
-          </div>
-          <div className={s.extra__item}>
-            <li className={s.extra__item_text}>
-              <span className={s.extra__info_span}></span>
-              {shelves?.counts.want_to_read || 0} - хотят прочесть
+            <li className={s.extra__item_li}>
+              <p className={s.extr}>
+                <span className={s.extra__info_span}></span>
+                {shelves?.counts.want_to_read || 0} - хотят прочесть
+              </p>
             </li>
           </div>
         </div>
 
         <section className={s.extra__book_author}>
-          <h3 className={s.extra__book_author_title}>Краткая биография автора</h3>
+          <h3 className={s.extra__book_author_title}>
+            Краткая биография автора
+          </h3>
           <div className={s.extra__book_author_wrap}>
             <img
               className={s.extra__book_picture}
-              src={`https://covers.openlibrary.org/a/olid/${authorKey}.jpg` || noPhoto}
+              src={
+                `https://covers.openlibrary.org/a/olid/${authorKey}.jpg` ||
+                noPhoto
+              }
               alt="authorPicture"
             />
             <p>{data.bookAuthor?.personal_name}</p>
-            <p>{`${data.bookAuthor?.birth_date?.slice(-4) || ''} ${data.bookAuthor?.death_date ? '-' + data.bookAuthor?.death_date?.slice(-4) : ''}`}</p>
+            <p>{`${data.bookAuthor?.birth_date?.slice(-4) || ""} ${
+              data.bookAuthor?.death_date
+                ? "-" + data.bookAuthor?.death_date?.slice(-4)
+                : ""
+            }`}</p>
           </div>
           <p className={s.extra__book_author_bio}>
             {data.bookAuthor?.bio || "There is no biography for this author."}
           </p>
-            {
-              data.bookAuthor?.wikipedia 
-              ?
-              <a className={s.extra__book_author_wiki} href={data.bookAuthor?.wikipedia}>Link to Wikipedia</a>
-              :
-              null
-            }  
+          {data.bookAuthor?.wikipedia ? (
+            <a
+              className={s.extra__book_author_wiki}
+              href={data.bookAuthor?.wikipedia}
+            >
+              Link to Wikipedia
+            </a>
+          ) : null}
         </section>
 
         <h3>Описание</h3>
@@ -145,11 +169,21 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
         </p>
         <details className={s.extra__info_details}>
           <summary>Рубрики</summary>
-          {data.bookInfo?.subjects.map((item: string, id: number) => (
-            <a className={s.extra__info_link} href={`https://openlibrary.org/subjects/${item.replace(/\s+/g, "_").toLowerCase()}`} key={id}>
-              {item}
-            </a>
-          ))}
+          {data.bookInfo?.subjects ? (
+            data.bookInfo?.subjects.map((item: string, id: number) => (
+              <a
+                className={s.extra__info_link}
+                href={`https://openlibrary.org/subjects/${item
+                  .replace(/\s+/g, "_")
+                  .toLowerCase()}`}
+                key={id}
+              >
+                {item}
+              </a>
+            ))
+          ) : (
+            <p>Categories not found.</p>
+          )}
         </details>
         {subjects ? (
           <>
