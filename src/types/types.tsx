@@ -63,4 +63,17 @@ export interface BookState {
   bookAuthor: AuthorType | null;
   isLoading: "idle" | "loading" | "loaded" | "error";
   error: string | null;
+  theme: 'light' | 'dark',
+}
+
+//////////////Theme////////////////
+
+export enum Theme {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
+export type MyTheme = {
+  changeTheme: Function
+  theme: string
 }

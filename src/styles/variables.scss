@@ -1,0 +1,13 @@
+$primary-colors: #4793FF;
+
+
+$text-light-theme: #393280;
+$text-dark-theme: #000;
+
+
+:root {
+    //text
+    --text-color-dark: #{$text-light-theme};
+    --text-color-light: #{$text-dark-theme};
+    --text-color-default: var(--text-color-light);
+  }

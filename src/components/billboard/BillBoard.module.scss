@@ -1,3 +1,6 @@
+@import "../../styles/variables.scss";
+
+
 .billboard {
     width: 100%;
     height: auto;
@@ -16,7 +19,7 @@
     }
 
     &__title {
-        color: #393280;
+        color: var(#{--text-color-default});
         font-size: 60px;
         line-height: 145%;
     }

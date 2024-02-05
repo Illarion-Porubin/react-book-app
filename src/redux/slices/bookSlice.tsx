@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { AuthorType, BookInfoType, BookState, BookType, RatingsType, SearchType, ShelvesType } from "../../types/types";
+import { AuthorType, BookInfoType, BookState, BookType, RatingsType, SearchType, ShelvesType, Theme } from "../../types/types";
+import { changeCssRootVariables } from "../../model/changeCssRootVariables";
 import axios from "axios";
 
 export const fetchBookSearch = createAsyncThunk<SearchType[],string,{ rejectValue: string }
@@ -125,6 +126,7 @@ export const initialState: BookState = {
   bookAuthor: null,
   isLoading: "idle",
   error: null,
+  theme: Theme.LIGHT,
 };
 
 export const bookSlice = createSlice({
@@ -136,6 +138,10 @@ export const bookSlice = createSlice({
     },
     addKey: (state, action) => {
       state.bookKey = action.payload;
+    },
+    changeTheme: (state, action) => {
+      state.theme = action.payload;
+      changeCssRootVariables(action.payload);
     }
   },
   extraReducers: (builder) => {
