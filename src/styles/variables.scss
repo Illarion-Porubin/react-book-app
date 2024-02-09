@@ -1,13 +1,87 @@
 $primary-colors: #4793FF;
 
-
-$text-light-theme: #393280;
-$text-dark-theme: #000;
+//background-book-color
+$background-book-color-light-theme: #ffffff;
+$background-book-color-dark-theme: #0a0321;
+//background-header
+$background-header-color-light-theme: #173f5f;
+$background-header-color-dark-theme: #12033e;
+//background
+$background-color-light-theme: #ffffff;
+$background-color-dark-theme: #232323;
+//text
+$main-text-light-theme: #fff;
+$main-text-dark-theme: #393280;
+$dop-text-light-theme: #000;
+$dop-text-dark-theme: #fff;
+$small-text-light-theme: #393280;
+$small-text-dark-theme: #000;
+//background-text
+$background-text-color-light-theme: #ffffffc7;
+$background-text-color-dark-theme: #232323c7;
+//billboard
+$billboard-color-one-light-theme: rgb(229, 235, 255);
+$billboard-color-one-dark-theme: #380897 -2.75%;
+$billboard-color-two-light-theme: rgb(164, 185, 255);
+$billboard-color-two-dark-theme: #5b44af 20.07%;
+$billboard-color-three-light-theme: rgb(178, 153, 255);
+$billboard-color-three-dark-theme: #a677ec 54.28%;
+$billboard-color-four-light-theme: rgb(159, 111, 255);
+$billboard-color-four-dark-theme: #5950ff 100%; 
+//search
+$search-border-color-light-theme:2px solid #000;
+$search-border-color-dark-theme:2px solid #fff;
+$search-text-color-light-theme:#000;
+$search-text-color-dark-theme:#fff;
 
 
 :root {
-    //text
-    --text-color-dark: #{$text-light-theme};
-    --text-color-light: #{$text-dark-theme};
-    --text-color-default: var(--text-color-light);
+    //background-book-color
+    --background-book-color-dark: #{$background-book-color-dark-theme};
+    --background-book-color-light: #{$background-book-color-light-theme};
+    --background-book-color-default: var(--background-book-color-dark-theme);
+    //background-header
+    --background-header-color-dark: #{$background-header-color-dark-theme};
+    --background-header-color-light: #{$background-header-color-light-theme};
+    --background-header-color-default: var(--background-header-color-dark-theme);
+    //background-text
+    --background-text-color-dark: #{$background-text-color-dark-theme};
+    --background-text-color-light: #{$background-text-color-light-theme};
+    --background-text-color-default: var(--background-text-color-dark-theme);
+    //search
+    --search-border-color-dark: #{$search-border-color-dark-theme};
+    --search-border-color-light: #{$search-border-color-light-theme};
+    --search-border-color-default: var(--search-border-color-light-theme);
+    --search-text-color-dark: #{$search-text-color-dark-theme};
+    --search-text-color-light: #{$search-text-color-light-theme};
+    --search-text-color-default: var(--search-text-color-light-theme);
+    //billboard
+    --billboard-color-one-dark: #{$billboard-color-one-dark-theme};
+    --billboard-color-one-light: #{$billboard-color-one-light-theme};
+    --billboard-color-one-default: var(--billboard-color-one-light-theme);
+    --billboard-color-two-dark: #{$billboard-color-two-dark-theme};
+    --billboard-color-two-light: #{$billboard-color-two-light-theme};
+    --billboard-color-two-default: var(--billboard-color-two-light-theme);
+    --billboard-color-three-dark: #{$billboard-color-three-dark-theme};
+    --billboard-color-three-light: #{$billboard-color-three-light-theme};
+    --billboard-color-three-default: var(--billboard-color-three-light-theme);
+    --billboard-color-four-dark: #{$billboard-color-four-dark-theme};
+    --billboard-color-four-light: #{$billboard-color-four-light-theme};
+    --billboard-color-four-default: var(--billboard-color-four-light-theme);
+    //background-color
+    --background-color-dark: #{$background-color-dark-theme};
+    --background-color-light: #{$background-color-light-theme};
+    --background-color-default: var(--background-color-light-theme);
+    //main-text
+    --main-text-color-dark: #{$main-text-light-theme};
+    --main-text-color-light: #{$main-text-dark-theme};
+    --main-text-color-default: var(--main-text-color-light);
+    //dop-text
+    --dop-text-color-dark: #{$dop-text-dark-theme};
+    --dop-text-color-light: #{$dop-text-light-theme};
+    --dop-text-color-default: var(--dop-text-color-light);
+    //small-text
+    --small-text-color-dark: #{$small-text-light-theme};
+    --small-text-color-light: #{$small-text-dark-theme};
+    --small-text-color-default: var(--small-text-color-light);
   }

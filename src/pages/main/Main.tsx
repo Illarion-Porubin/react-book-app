@@ -17,7 +17,7 @@ export const Main = () => {
 
   return (
     <>
-      <Header />
+      <Header/>
       <Menu />
       <BillBoard />
       <BookList />

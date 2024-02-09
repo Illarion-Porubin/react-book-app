@@ -1,3 +1,5 @@
+@import url('../../styles//variables.scss');
+
 .title {
     display: flex;
     align-items: center;
@@ -7,7 +9,7 @@
     margin: 55px 0;
 
     &__text {
-        color: #393280;
+        color: var(#{--dop-text-color-default});
         text-align: center;
         font-family: Inter;
         font-size: 48px;

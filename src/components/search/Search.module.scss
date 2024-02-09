@@ -1,8 +1,10 @@
+@import url("../../styles//variables.scss");
+
 .search {
     max-width: 600px;
     height: auto;
     position: absolute;
-    bottom: 0;
+    bottom: 15px;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -12,10 +14,17 @@
         width: 80%;
         padding: 0 15px;
         height: 45px;
-        border: 2px solid black;
         border-radius: 33px;
         background-color: transparent;
+        border: var(#{--search-border-color-default});
+        color: var(#{--search-text-color-default});
     }
+
+    &__input:focus {outline: none;}
+    &__input::placeholder{
+        color: var(#{--search-text-color-default});
+    }
+
 }
 
 @media (max-width: 680px) {
