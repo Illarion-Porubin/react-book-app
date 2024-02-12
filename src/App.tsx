@@ -4,8 +4,18 @@ import "./styles/_normolize.css";
 import "./styles/main.scss";
 import { Route, Routes } from "react-router-dom";
 import { BookInfo } from "./components/bookInfo/BookInfo";
+import { useCustomSelector } from "./hooks/store";
+import { selectBookData } from "./redux/selectors";
+import { changeCssRootVariables } from "./model/changeCssRootVariables";
+import { Theme } from "./types/types";
+
 
 function App() {
+
+  const theme = useCustomSelector(selectBookData);
+  React.useEffect(() => {
+    changeCssRootVariables(theme.theme === Theme.LIGHT ? Theme.LIGHT : Theme.DARK)
+  }, [theme.theme])
   
   return (
     <div className="App">

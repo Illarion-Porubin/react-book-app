@@ -1,7 +1,15 @@
-.icons{
+.icons {
     width: 132px;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-right: 20px;
+    position: relative;
+    bottom: -2px;
+
+    &__icon {
+        width: 24px;
+        height: 24px;
+    }
 }

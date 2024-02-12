@@ -8,13 +8,13 @@ export const Icons: React.FC = () => {
   return (
     <div className={s.icons}>
       <a href="/#">
-        <img className={s.icon} src={facebook} alt="facebook" />
+        <img className={s.icons__icon} src={facebook} alt="facebook" />
       </a>
       <a href="/#">
-        <img className={s.icon} src={instagram} alt="instagram" />
+        <img className={s.icons__icon} src={instagram} alt="instagram" />
       </a>
       <a href="/#">
-        <img className={s.icon} src={twitter} alt="twitter" />
+        <img className={s.icons__icon} src={twitter} alt="twitter" />
       </a>
     </div>
   );

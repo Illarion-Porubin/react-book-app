@@ -16,12 +16,7 @@ export const BookInfo: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(bookSlice.actions.addKey(id));
-    if(id){
-      dispatch(fetchBookInfo(id));
-    }
-    else{
-      window.alert("Couldn't find the ID")
-    }
+    if(id)dispatch(fetchBookInfo(id));
   }, [dispatch, id]);
 
   const checkGenres = () => {

@@ -22,9 +22,15 @@
             border-right: transparent;
         }
         &:hover {
-            color: #ed553b;
-            transition: all 0.3s;
+            .menu__link{
+                color: #ed553b;
+                transition: all 0.3s;
+            }
         }
+    }
+
+    &__link.menu__link_active{
+        color: #ed553b; 
     }
 
     &__link{
@@ -34,9 +40,11 @@
         line-height: normal;
         letter-spacing: 2.16px;
         color: var(#{--dop-text-color-default});
-        text-transform: capitalize;
+        transition: all 0.3s;
+        text-transform: uppercase;
     }
 }
+
 
 
 @media(max-width: 680px) {

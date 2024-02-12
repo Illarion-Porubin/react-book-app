@@ -99,10 +99,10 @@ export const fetchBookAuthor = createAsyncThunk<AuthorType, string, {rejectValue
   try {
     if(authorKey){
       const {data} = await axios.get(`https://openlibrary.org/authors/${authorKey}.json`);
-      const { bio, personal_name, birth_date, wikipedia, death_date} = data;
+      const { bio, personal_name, birth_date, wikipedia, death_date, name} = data;
       const newData: AuthorType = {
-        bio: (typeof(bio) === 'string' ? bio : bio.value),
-        personal_name: personal_name || null,
+        bio: bio ? (typeof(bio) === 'string' ? bio : bio.value) : null,
+        personal_name: personal_name || name || null,
         birth_date: birth_date || null,
         death_date: death_date || null,
         wikipedia: wikipedia || null,

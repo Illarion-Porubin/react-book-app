@@ -33,26 +33,23 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
   );
 
   const getBooksRatings = React.useCallback(async () => {
-    if (data.bookKey) {
+    if (typeof(data.bookKey) === 'string') {
       const res = await dispatch(fetchBooksRatings(data.bookKey));
       if (res.payload) {
         setRatings(res.payload);
       }
-    } else {
-      window.alert("Couldn't find the ID");
-    }
+    } 
   }, [dispatch, data.bookKey]);
 
   const getBookshelves = React.useCallback(async () => {
-    if (data.bookKey) {
+    if (typeof(data.bookKey) === 'string') {
       const res = await dispatch(fetchBookshelves(data.bookKey));
       if (res.payload) {
         setShelves(res.payload);
       }
-    } else {
-      window.alert("Couldn't find the ID");
-    }
+    } 
   }, [dispatch, data.bookKey]);
+
 
   React.useEffect(() => {
     getBooksRatings();
@@ -142,8 +139,8 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
               }
               alt="authorPicture"
             />
-            <p>{data.bookAuthor?.personal_name}</p>
-            <p>{`${data.bookAuthor?.birth_date?.slice(-4) || ""} ${
+            <p className={s.extra__book_author_name}>{data.bookAuthor?.personal_name}</p>
+            <p className={s.extra__book_author_date}>{`${data.bookAuthor?.birth_date?.slice(-4) || ""} ${
               data.bookAuthor?.death_date
                 ? "-" + data.bookAuthor?.death_date?.slice(-4)
                 : ""
@@ -162,13 +159,12 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
           ) : null}
         </section>
 
-        <h3>Описание</h3>
+        <h3 className={s.extra__title_desc}>Описание</h3>
         <p className={s.extra__text}>
-          <span className={s.extra__info_span}></span>
           {data.bookInfo?.description}
         </p>
         <details className={s.extra__info_details}>
-          <summary>Рубрики</summary>
+          <summary className={s.extra__categories}>Рубрики</summary>
           {data.bookInfo?.subjects ? (
             data.bookInfo?.subjects.map((item: string, id: number) => (
               <a

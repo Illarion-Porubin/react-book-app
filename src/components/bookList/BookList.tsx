@@ -7,8 +7,6 @@ import { useCustomSelector } from "../../hooks/store";
 import { selectBookData } from "../../redux/selectors";
 import { SearchType } from "../../types/types";
 
-
-
 export const BookList: React.FC = () => {
   const data = useCustomSelector(selectBookData)
 
