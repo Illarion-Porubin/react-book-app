@@ -127,12 +127,16 @@ export const initialState: BookState = {
   isLoading: "idle",
   error: null,
   theme: Theme.LIGHT,
+  menuActive: false,
 };
 
 export const bookSlice = createSlice({
   name: "book",
   initialState,
   reducers: {
+    changeMenu: (state, action) => {
+      state.menuActive = action.payload;
+    },
     addId: (state, action) => {
       state.bookId = action.payload;
     },

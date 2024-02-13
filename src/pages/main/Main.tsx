@@ -13,8 +13,8 @@ export const Main = () => {
     <>
       <Header/>
       <Menu />
-      <BillBoard />
-      <BookList />
+      {/* <BillBoard />
+      <BookList /> */}
     </>
   );
 };

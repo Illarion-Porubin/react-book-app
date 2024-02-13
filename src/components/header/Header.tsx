@@ -10,7 +10,7 @@ import { selectBookData } from "../../redux/selectors";
 import { Theme } from "../../types/types";
 
 export const Header: React.FC = () => {
-  const {theme} = useCustomSelector(selectBookData);
+  const { theme } = useCustomSelector(selectBookData);
   const dispatch = useCustomDispatch();
 
   const changeTheme = React.useCallback((): void => {
@@ -22,14 +22,24 @@ export const Header: React.FC = () => {
   }, [theme, dispatch]);
 
   return (
-    <section className={s.header} id='header'>
-      <a href="/#" className={s.header__logo}>
-        <img className={s.header__logo_img} src={logo} alt="logo" />
-      </a>
-      <div className={s.header__assets}>
-        <Icons />
-        {/* <BurgerMenu/> */}
-        <Toggle changeTheme={changeTheme}/>
+    <section className={s.header} id="header">
+      <div className="container">
+        <div className={s.header__wrap}>
+          <a href="/#" className={s.header__logo}>
+            <img className={s.header__logo_img} src={logo} alt="logo" />
+          </a>
+          <div className={s.header__assets}>
+            <div className={s.header__assets_item}>
+              <Icons />
+            </div>
+            <div className={s.header__assets_item}>
+              <Toggle changeTheme={changeTheme} />
+            </div>
+            <div className={s.header__assets_item}>
+              <BurgerMenu />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

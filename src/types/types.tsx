@@ -64,6 +64,7 @@ export interface BookState {
   isLoading: "idle" | "loading" | "loaded" | "error";
   error: string | null;
   theme: 'light' | 'dark',
+  menuActive: boolean
 }
 
 //////////////Theme////////////////
