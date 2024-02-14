@@ -28,6 +28,10 @@
 }
 
 @media(max-width:1024px){
+    .header{
+        position: fixed;
+        z-index: 1;
+    }
     .header__assets_item{
         display: none;
     }
@@ -35,7 +39,7 @@
         display: block;
     }
     .header__assets{
-        width: 30px;
+        width: 110px;
         margin: 0;
     }
     .header__logo{

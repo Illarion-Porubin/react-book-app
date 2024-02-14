@@ -32,9 +32,7 @@ export const Header: React.FC = () => {
             <div className={s.header__assets_item}>
               <Icons />
             </div>
-            <div className={s.header__assets_item}>
-              <Toggle changeTheme={changeTheme} />
-            </div>
+            <Toggle changeTheme={changeTheme} />
             <div className={s.header__assets_item}>
               <BurgerMenu />
             </div>

@@ -4,3 +4,11 @@
     justify-content:flex-start;
     margin-bottom: 55px;
 }
+
+
+@media(max-width:1090px) {
+    .booklist{
+        justify-content: center;
+    }
+}
+

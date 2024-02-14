@@ -16,7 +16,7 @@ export const BookInfo: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(bookSlice.actions.addKey(id));
-    if(id)dispatch(fetchBookInfo(id));
+    if (id) dispatch(fetchBookInfo(id));
   }, [dispatch, id]);
 
   const checkGenres = () => {
@@ -33,29 +33,36 @@ export const BookInfo: React.FC = () => {
     }
   };
 
-
   if (data.isLoading === "loading") return <Loader />;
 
   return (
     <>
-      <Link className={s.back} to="/">
-        Go Back
-      </Link>
       <div className="container">
-        <section>
+        <section className={s.book__wrap}>
+          <Link className={s.back} to="/">
+            Go Back
+          </Link>
           <main className={s.book}>
             <div className={s.book__img_wrap}>
-              <img className={s.book__img} src={data.bookInfo?.covers || bookNotFound} alt="book__img" />
+              <img
+                className={s.book__img}
+                src={data.bookInfo?.covers || bookNotFound}
+                alt="book__img"
+              />
             </div>
             <div className={s.book__info}>
               <h1 className={s.book__info_title}>{data.bookInfo?.title}</h1>
               <p className={s.book__info_text}>{`Жанры: ${checkGenres()}`}</p>
-              <p className={s.book__info_text}>{`Издание: ${data.bookInfo?.created || 'No data available'}`}</p>
-              <p className={s.book__info_text}>{`Обновление: ${data.bookInfo?.last_modified || 'No data available'}`}</p>
+              <p className={s.book__info_text}>{`Издание: ${
+                data.bookInfo?.created || "No data available"
+              }`}</p>
+              <p className={s.book__info_text}>{`Обновление: ${
+                data.bookInfo?.last_modified || "No data available"
+              }`}</p>
             </div>
           </main>
         </section>
-        <ExtraInfoBook bookImg={data.bookInfo?.covers || ''} />
+        <ExtraInfoBook bookImg={data.bookInfo?.covers || ""} />
       </div>
     </>
   );

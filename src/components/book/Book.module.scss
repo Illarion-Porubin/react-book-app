@@ -96,3 +96,15 @@
         transition: all 0.3s;
     }
 }
+
+
+@media(max-width:460px) {
+    .book{
+        &__wrap{
+            margin: 0;
+            margin-bottom: 20px;
+            width: 260px;
+            height: 420px;
+        }
+    }
+}
