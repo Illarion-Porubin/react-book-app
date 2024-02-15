@@ -1,5 +1,5 @@
 .slide {
-    width: auto;
+    width: 320px;
     height: 280px;
     &__img {
         object-fit: cover;
@@ -11,8 +11,6 @@
 
 .arrow {
     position: absolute;
-    // width: 100px;
-    // height: 100px;
     top: var(--swiper-navigation-top-offset, 50%);
     width: calc(var(--swiper-navigation-size) / 44 * 50);
     height: var(--swiper-navigation-size);
@@ -41,4 +39,11 @@
 }
 .next {
     right: 0;
+}
+
+@media(max-width: 380px){
+    .slide{
+        display: flex;
+        justify-content: center;
+    }
 }

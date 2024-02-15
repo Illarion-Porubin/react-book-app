@@ -9,7 +9,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { useCustomDispatch } from "../../hooks/store";
-import { fetchBookInfo, bookSlice, fetchBookSlider } from "../../redux/slices/bookSlice";
+import {
+  fetchBookInfo,
+  bookSlice,
+  fetchBookSlider,
+} from "../../redux/slices/bookSlice";
 import { Link } from "react-router-dom";
 import imgNotFound from "../../assets/jpg/cover_not_found.jpg";
 import { Loader } from "../loader/Loader";
@@ -34,38 +38,62 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
     sliderRef.current.swiper.slideNext();
   }, []);
 
-
   const fetchSlider = React.useCallback(async () => {
     const res = await dispatch(fetchBookSlider(subject));
-    const data = res.payload
-    setSliderList(data)
-  }, [dispatch, subject])
+    const data = res.payload;
+    setSliderList(data);
+  }, [dispatch, subject]);
 
   React.useEffect(() => {
-    fetchSlider()
+    fetchSlider();
   }, [fetchSlider]);
 
-
-  if(Array.isArray(sliderList) ? sliderList.length < 0 : null) return <Loader/>
+  if (Array.isArray(sliderList) ? sliderList.length < 0 : null)
+    return <Loader />;
 
   return (
     <>
       <Swiper
         modules={[Navigation]}
-        spaceBetween={50}
-        slidesPerView={4}
-        loopAdditionalSlides={4}
+        spaceBetween={64}
+        slidesPerView={6}
+        loopAdditionalSlides={1}
         ref={sliderRef}
+        breakpoints={{
+          // when window width is >= 640px
+          1080: {
+            // width: 1080,
+            slidesPerView: 6,
+          },
+          // when window width is >= 768px
+          720: {
+            // width: 768,
+            slidesPerView: 4,
+          },
+          580: {
+            // width: 768,
+            slidesPerView: 3,
+          },
+          380: {
+            // width: 768,
+            slidesPerView: 2,
+          },
+          280: {
+            // width: 768,
+            slidesPerView: 1,
+            centeredSlides: true,
+            centeredSlidesBounds: true,
+          },
+        }}
       >
-        {
-          Array.isArray(sliderList) ?
+        {Array.isArray(sliderList) ? (
           sliderList.map((item: BookType, id: number) => (
             <SwiperSlide key={id}>
               <Link
                 className={s.book__popup_btn}
                 to={`/book/${item.key.replace("/works/", "")}`}
                 onClick={() => dispatch(bookSlice.actions.addId(id))}
-                >
+              >
                 <div
                   className={s.slide}
                   onClick={() =>
@@ -74,16 +102,20 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
                 >
                   <img
                     className={s.slide__img}
-                    src={item.cover_id ? `https://covers.openlibrary.org/b/id/${item.cover_id}-M.jpg` : imgNotFound}
+                    src={
+                      item.cover_id
+                        ? `https://covers.openlibrary.org/b/id/${item.cover_id}-M.jpg`
+                        : imgNotFound
+                    }
                     alt="slide__img"
                   />
                 </div>
               </Link>
             </SwiperSlide>
           ))
-          :
+        ) : (
           <p>No matches were found or an error occurred</p>
-        }
+        )}
         <button className={`${s.arrow} ${s.next}`} onClick={handleNext}>
           <svg
             width="62"
