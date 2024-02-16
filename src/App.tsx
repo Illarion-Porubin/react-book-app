@@ -3,11 +3,11 @@ import { Main } from "./pages/main/Main";
 import "./styles/_normolize.css";
 import "./styles/main.scss";
 import { Route, Routes } from "react-router-dom";
-import { BookInfo } from "./components/bookInfo/BookInfo";
 import { useCustomSelector } from "./hooks/store";
 import { selectBookData } from "./redux/selectors";
 import { changeCssRootVariables } from "./model/changeCssRootVariables";
 import { Theme } from "./types/types";
+import { BookInfo } from "./pages/bookInfo/BookInfo";
 
 
 function App() {

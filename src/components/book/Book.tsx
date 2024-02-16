@@ -5,6 +5,7 @@ import bookNotFound from "../../assets/jpg/cover_not_found.jpg";
 import { useCustomDispatch } from "../../hooks/store";
 import { bookSlice } from "../../redux/slices/bookSlice";
 import { SearchType } from "../../types/types";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface Props {
   book: SearchType;
@@ -20,11 +21,13 @@ export const Book: React.FC<Props> = ({ book, id }) => {
   return (
     <article className={s.book}>
       <div className={s.book__wrap}>
-        <img
+        <LazyLoadImage
           className={s.book__picture}
+          effect="blur"
+          alt={"BookImg"}
           src={BookImg}
-          alt="book__picture"
-          loading="lazy"
+          useIntersectionObserver={true}
+          visibleByDefault={false}
         />
         {book.key ? (
           <Link

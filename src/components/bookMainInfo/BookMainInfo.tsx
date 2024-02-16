@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./BookInfo.module.scss";
+import s from "./BookMainInfo.module.scss";
 import { Link, useParams } from "react-router-dom";
 import { Loader } from "../loader/Loader";
 import { useCustomDispatch, useCustomSelector } from "../../hooks/store";
@@ -9,7 +9,7 @@ import { ExtraInfoBook } from "../extraInfoBook/ExtraInfoBook";
 import { bookSlice } from "../../redux/slices/bookSlice";
 import bookNotFound from "../../assets/jpg/cover_not_found.jpg";
 
-export const BookInfo: React.FC = () => {
+export const BookMainInfo: React.FC = () => {
   const dispatch = useCustomDispatch();
   const data = useCustomSelector(selectBookData);
   const { id } = useParams();

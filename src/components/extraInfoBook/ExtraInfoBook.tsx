@@ -66,7 +66,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
           <div className={s.extra__find_book}>
             <ul className={s.extra__find_list}>
               <span className={s.extra__note}>
-                Проверьте ближайшие библиотеки
+              Check the nearest libraries
               </span>
               <li className={s.extra__li}>
                 <a className={s.extra__link} href="/#">
@@ -78,7 +78,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
                   WorldCat
                 </a>
               </li>
-              <span className={s.extra__note}>Купить эту книгу</span>
+              <span className={s.extra__note}>Buy this book</span>
               <li className={s.extra__li}>
                 <a className={s.extra__link} href="/#">
                   Better World Books
@@ -98,7 +98,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
             <div className={s.extra__item}>
               <li className={s.extra__item_li}>
                 <p className={s.extr}>
-                  {String(ratings?.summary.average).slice(0, 3)} - рэйтинг книги
+                  {String(ratings?.summary.average).slice(0, 3)} - book rating
                 </p>
               </li>
             </div>
@@ -106,7 +106,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
               <li className={s.extra__item_li}>
                 <p className={s.extr}>
                   <span className={s.extra__info_span}></span>
-                  {shelves?.counts.currently_reading || 0} - уже читают
+                  {shelves?.counts.currently_reading || 0} - already reading
                 </p>
               </li>
             </div>
@@ -114,7 +114,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
               <li className={s.extra__item_li}>
                 <p className={s.extr}>
                   <span className={s.extra__info_span}></span>
-                  {shelves?.counts?.already_read || 0} - уже прочли
+                  {shelves?.counts?.already_read || 0} - have read
                 </p>
               </li>
             </div>
@@ -122,7 +122,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
               <li className={s.extra__item_li}>
                 <p className={s.extr}>
                   <span className={s.extra__info_span}></span>
-                  {shelves?.counts.want_to_read || 0} - хотят прочесть
+                  {shelves?.counts.want_to_read || 0} - want to read it
                 </p>
               </li>
             </div>
@@ -130,7 +130,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
 
           <section className={s.extra__book_author}>
             <h3 className={s.extra__book_author_title}>
-              Краткая биография автора
+              a brief biography of the author
             </h3>
             <div className={s.extra__book_author_wrap}>
               <img
@@ -168,7 +168,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
             ) : null}
           </section>
 
-          <h3 className={s.extra__title_desc}>Описание</h3>
+          <h3 className={s.extra__title_desc}>Description</h3>
           <p className={s.extra__text}>
             {data.bookInfo?.description?.replace(
               /(?:https?|ftp):\/\/[\n\S]+/g,
@@ -176,7 +176,7 @@ export const ExtraInfoBook: React.FC<Props> = ({ bookImg }) => {
             )}
           </p>
           <details className={s.extra__info_details}>
-            <summary className={s.extra__categories}>Рубрики</summary>
+            <summary className={s.extra__categories}>Categories</summary>
             {data.bookInfo?.subjects ? (
               data.bookInfo?.subjects.map((item: string, id: number) => (
                 <a

@@ -78,11 +78,12 @@ export const ReactSwiper: React.FC<Props> = ({ subject }) => {
             // width: 768,
             slidesPerView: 2,
           },
-          280: {
+          220: {
             // width: 768,
             slidesPerView: 1,
-            centeredSlides: true,
-            centeredSlidesBounds: true,
+            // centeredSlides: true,
+            // centeredSlidesBounds: true,
+            // loopAdditionalSlides: 0
           },
         }}
       >

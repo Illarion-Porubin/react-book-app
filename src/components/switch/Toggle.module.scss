@@ -37,10 +37,6 @@
         transition: all .3s;
     }
 
-    // &__input:focus + &__slider{
-    //     box-shadow: 0 0 14px #8425e9;
-    // }
-
     &__input:checked + &__slider{
         background-color: #8425e9;
         box-shadow: 0 0 14px #8425e9;

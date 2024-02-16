@@ -1,11 +1,11 @@
-@import url('../../styles//variables.scss');
+@import url("../../styles//variables.scss");
 
 .header {
     width: 100%;
     height: 58px;
     background-color: var(#{--background-header-color-default});
     margin-bottom: 55px;
-    &__wrap{
+    &__wrap {
         width: 100%;
         height: 58px;
         display: flex;
@@ -27,22 +27,22 @@
     }
 }
 
-@media(max-width:1024px){
-    .header{
+@media (max-width: 1024px) {
+    .header {
         position: fixed;
         z-index: 1;
-    }
-    .header__assets_item{
-        display: none;
-    }
-    .header__assets_item:last-child{
-        display: block;
-    }
-    .header__assets{
-        width: 110px;
-        margin: 0;
-    }
-    .header__logo{
-        margin: 0;
+        &__assets_item {
+            display: none;
+        }
+        &__assets_item:last-child {
+            display: block;
+        }
+        &__assets {
+            width: 110px;
+            margin: 0;
+        }
+        &__logo {
+            margin: 0;
+        }
     }
 }
