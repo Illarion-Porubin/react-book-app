@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
   }, [theme, dispatch]);
 
   return (
-    <section className={s.header} id="header">
+    <section className={s.header}>
       <div className="container">
         <div className={s.header__wrap}>
           <a href="/#" className={s.header__logo}>

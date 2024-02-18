@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .icons {
     width: 132px;
     height: auto;
@@ -11,5 +13,19 @@
     &__icon {
         width: 24px;
         height: 24px;
+        path {
+            transition-property: color;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in-out;
+            color: white;
+        }
+        &:hover {
+            path {
+                transition-property: color;
+                transition-duration: 0.3s;
+                transition-timing-function: ease-in-out;
+                color: var(#{--btn-up-color-default});
+            }
+        }
     }
 }

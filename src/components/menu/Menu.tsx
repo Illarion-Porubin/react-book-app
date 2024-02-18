@@ -10,7 +10,7 @@ export const Menu: React.FC = () => {
   const MENU = [
     {
       title: "home",
-      link: "#header",
+      link: "#",
     },
     {
       title: "about us",

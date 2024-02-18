@@ -1,18 +1,18 @@
 @import "../../styles/variables.scss";
 
-
 .billboard {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: space-between;
-    background: linear-gradient(79deg, 
-    var(#{--billboard-color-one-default}), 
-    var(#{--billboard-color-two-default}),
-    var(#{--billboard-color-three-default}),
-    var(#{--billboard-color-four-default}),
+    background: linear-gradient(
+        79deg,
+        var(#{--billboard-color-one-default}),
+        var(#{--billboard-color-two-default}),
+        var(#{--billboard-color-three-default}),
+        var(#{--billboard-color-four-default})
     );
-    z-index: 0;
+    z-index: 1;
     position: relative;
     padding: 40px 0;
 
@@ -54,19 +54,64 @@
         width: 100%;
         height: auto;
     }
+
+    &__up_btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 80px;
+        height: 80px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        display: none;
+        z-index: 55;
+    }
+    &__up_btn.active {
+        display: block;
+        z-index: 55;
+    }
+    &__up {
+        border-radius: 100%;
+        outline: 8px solid transparent;
+        box-shadow: 0 0 14px transparent;
+        outline-offset: -8px;
+        transition-duration: 0.4s;
+        transition-timing-function: ease-in-out;
+        z-index: 2;
+        &:hover {
+            transition-duration: 0.4s;
+            transition-timing-function: ease-in-out;
+            box-shadow: 0 0 14px var(#{--btn-up-color-default});
+            outline: 8px solid var(#{--btn-up-color-default});
+        }
+        &:hover {
+            path {
+                transition-property: color;
+                transition-duration: 0.3s;
+                transition-timing-function: ease-in-out;
+            }
+        }
+        path {
+            transition-property: color;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in-out;
+            color: var(#{--btn-up-color-default});
+        }
+    }
 }
 
 @media (max-width: 680px) {
-    .billboard{
-        &__img_wrap{
+    .billboard {
+        &__img_wrap {
             display: none;
         }
     }
 }
 
 @media (max-width: 840px) {
-    .billboard{
-        &__content{
+    .billboard {
+        &__content {
             max-width: 100%;
             text-align: center;
             display: flex;
@@ -75,33 +120,33 @@
             align-items: center;
             margin-left: 0;
         }
-        &__text{
+        &__text {
             text-align: left;
         }
-        &__img_wrap{
+        &__img_wrap {
             display: none;
         }
     }
 }
 
-@media (max-width: 510px){
-    .billboard{
-        &__title{
+@media (max-width: 510px) {
+    .billboard {
+        &__title {
             font-size: 48px;
         }
-        &__text{
+        &__text {
             font-size: 18px;
         }
     }
 }
 
-@media (max-width: 410px){
-    .billboard{
-        &__title{
+@media (max-width: 410px) {
+    .billboard {
+        &__title {
             margin-top: 40px;
             font-size: 30px;
         }
-        &__text{
+        &__text {
             font-size: 14px;
         }
     }

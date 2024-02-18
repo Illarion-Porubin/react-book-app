@@ -17,6 +17,7 @@ export function changeCssRootVariables(theme: Theme ) {
     `search-text-color`,
     `background-header-color`,
     `background-book-color`,
+    `btn-up-color`
   ]
 
   components.forEach(component => {
