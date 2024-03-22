@@ -1,17 +1,30 @@
 {
   "files": {
-    "main.css": "/react-book-app/static/css/main.5802d6dd.css",
-    "main.js": "/react-book-app/static/js/main.f0042115.js",
+    "main.css": "/react-book-app/static/css/main.ae1c91af.css",
+    "main.js": "/react-book-app/static/js/main.165d0b13.js",
     "static/media/poster4.png": "/react-book-app/static/media/poster4.9911b8bec8780a3e5666.png",
     "static/media/cover_not_found.jpg": "/react-book-app/static/media/cover_not_found.69846940c7af3e651508.jpg",
     "static/media/no_photo.png": "/react-book-app/static/media/no_photo.ae0f0c1218362239c5db.png",
     "static/media/sad_smiley.png": "/react-book-app/static/media/sad_smiley.8ee75cab7594b0579259.png",
+    "static/media/node.svg": "/react-book-app/static/media/node.6535c4ad5fdb1b246cb59c1c26eea9aa.svg",
+    "static/media/mongodb.svg": "/react-book-app/static/media/mongodb.2a8a44b2dfbc890e16a0d3bef0fa3b44.svg",
+    "static/media/postgresql.svg": "/react-book-app/static/media/postgresql.d3ce102edd2a0e6fb8f23486e05897fe.svg",
+    "static/media/mysql.svg": "/react-book-app/static/media/mysql.cdaf0a1e68770917e646707298f005ea.svg",
+    "static/media/sass.svg": "/react-book-app/static/media/sass.0e7976718f6f7614789fd254a8adba0f.svg",
+    "static/media/react.svg": "/react-book-app/static/media/react.10bba08ffe386dc3275c917bc6f6ddba.svg",
+    "static/media/redux.svg": "/react-book-app/static/media/redux.244b8e9e33ad43cfd9688524d4e84524.svg",
+    "static/media/typescript.svg": "/react-book-app/static/media/typescript.d4ac2748183d45de62cd0070d36ba121.svg",
+    "static/media/js.svg": "/react-book-app/static/media/js.f336f9d6adf5e033f6927969c3d9f667.svg",
+    "static/media/github.svg": "/react-book-app/static/media/github.1f38458819b2efeb40486291895db456.svg",
     "index.html": "/react-book-app/index.html",
-    "main.5802d6dd.css.map": "/react-book-app/static/css/main.5802d6dd.css.map",
-    "main.f0042115.js.map": "/react-book-app/static/js/main.f0042115.js.map"
+    "static/media/css3.svg": "/react-book-app/static/media/css3.127887e9c4a1adddd0c5317602ff0c86.svg",
+    "static/media/material-ui.svg": "/react-book-app/static/media/material-ui.efbc7a242fdbc117a4eeec97bf419035.svg",
+    "static/media/html-5.svg": "/react-book-app/static/media/html-5.2ca4fa00fb7df4e6945987426eff7421.svg",
+    "main.ae1c91af.css.map": "/react-book-app/static/css/main.ae1c91af.css.map",
+    "main.165d0b13.js.map": "/react-book-app/static/js/main.165d0b13.js.map"
   },
   "entrypoints": [
-    "static/css/main.5802d6dd.css",
-    "static/js/main.f0042115.js"
+    "static/css/main.ae1c91af.css",
+    "static/js/main.165d0b13.js"
   ]
 }
